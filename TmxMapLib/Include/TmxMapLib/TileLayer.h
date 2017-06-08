@@ -27,7 +27,10 @@ namespace TmxMapLib
         /*
         *   Constructs a TileLayer from the specified XML element.
         */
-        TileLayer(const int tmxOrder, const tinyxml2::XMLElement* layerElement);
+        TileLayer(
+            const Map* map,
+            const int tmxOrder,
+            const tinyxml2::XMLElement* layerElement);
 
         /*
         *   Returns the height of this layer in tiles.

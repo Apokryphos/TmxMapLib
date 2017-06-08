@@ -4,8 +4,10 @@
 namespace TmxMapLib
 {
     //  =======================================================================
-    Tile::Tile(const unsigned int rawGid)
-        : mRawGid(rawGid)
+    Tile::Tile(const unsigned int rawGid, const int x, const int y)
+    :   mRawGid(rawGid),
+        mX(x),
+        mY(y)
     {
     }
 
@@ -37,5 +39,17 @@ namespace TmxMapLib
     unsigned int Tile::GetRawGid() const
     {
         return mRawGid;
+    }
+
+    //  =======================================================================
+    int Tile::GetX() const
+    {
+        return mX;
+    }
+
+    //  =======================================================================
+    int Tile::GetY() const
+    {
+        return mY;
     }
 }

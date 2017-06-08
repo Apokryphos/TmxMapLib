@@ -29,8 +29,11 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
-    TileLayer::TileLayer(const int tmxOrder, const XMLElement* layerElement)
-        : LayerBase(LayerType::Tile, tmxOrder, layerElement)
+    TileLayer::TileLayer(
+        const Map* map,
+        const int tmxOrder,
+        const XMLElement* layerElement)
+        : LayerBase(LayerType::Tile, map, tmxOrder, layerElement)
     {
         LoadTileLayer(layerElement);
     }
@@ -131,9 +134,12 @@ namespace TmxMapLib
 
         //  Create tiles
         mTiles.reserve(tileCount);
-        for (int t = 0; t < tileCount; ++t)
+        for (int y = 0; y < mHeight; ++y)
         {
-            mTiles.emplace_back(rawGids[t]);
+            for (int x = 0; x < mWidth; ++x)
+            {
+                mTiles.emplace_back(rawGids[y * mWidth + x], x, y);
+            }
         }
     }
 }

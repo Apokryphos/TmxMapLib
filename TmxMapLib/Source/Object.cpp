@@ -1,7 +1,10 @@
 #include "TmxMapLib/Exceptions.h"
 #include "TmxMapLib/GidUtil.h"
 #include "TmxMapLib/Object.h"
+#include "TmxMapLib/ObjectGroup.h"
+#include "TmxMapLib/Map.h"
 #include <tinyxml2.h>
+#include <cassert>
 #include <iterator>
 #include <sstream>
 
@@ -73,9 +76,16 @@ namespace TmxMapLib
 
         if (objectElement->Attribute("gid"))
         {
+            //  Map should be valid since Tile objects don't exist in
+            //  tileset collision object groups
+            assert(mObjectGroup->GetMap() != nullptr);
+
             unsigned int rawGid;
             objectElement->QueryUnsignedAttribute("gid", &rawGid);
-            mTile = std::make_unique<Tile>(rawGid);
+            mTile = std::make_unique<Tile>(
+                rawGid,
+                mX / mObjectGroup->GetMap()->GetTileWidth(),
+                mY / mObjectGroup->GetMap()->GetTileHeight());
 
             mObjectType = ObjectType::Tile;
         }
@@ -105,8 +115,16 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
-    Object::Object(const tinyxml2::XMLElement* objectElement)
+    Object::Object(
+        const ObjectGroup* objectGroup,
+        const tinyxml2::XMLElement* objectElement)
+    :   mObjectGroup(objectGroup)
     {
+        if (objectGroup == nullptr)
+        {
+            throw NullArgumentException("objectGroup");
+        }
+
         LoadObject(objectElement);
     }
 

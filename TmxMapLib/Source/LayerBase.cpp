@@ -9,6 +9,7 @@ namespace TmxMapLib
     //  =======================================================================
     LayerBase::LayerBase(const LayerType layerType)
         :   mLayerType(layerType),
+            mMap(nullptr),
             mTmxOrder(0),
             mOpacity(1),
             mVisible(true)
@@ -18,10 +19,12 @@ namespace TmxMapLib
     //  =======================================================================
     LayerBase::LayerBase(
         const LayerType layerType,
+        const Map* map,
         const int tmxOrder,
         const XMLElement* layerElement)
         :
             mLayerType(layerType),
+            mMap(map),
             mTmxOrder(tmxOrder),
             mOpacity(1),
             mVisible(true)
@@ -30,9 +33,15 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
-    LayerType LayerBase:: GetLayerType() const
+    LayerType LayerBase::GetLayerType() const
     {
         return mLayerType;
+    }
+
+    //  =======================================================================
+    const Map* LayerBase::GetMap() const
+    {
+        return mMap;
     }
 
     //  =======================================================================

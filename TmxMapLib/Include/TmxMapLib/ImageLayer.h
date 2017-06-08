@@ -24,7 +24,10 @@ namespace TmxMapLib
         /*
         *   Constructs an ImageLayer from the specified XML element.
         */
-        ImageLayer(const int tmxOrder, const tinyxml2::XMLElement* layerElement);
+        ImageLayer(
+            const Map* map,
+            const int tmxOrder,
+            const tinyxml2::XMLElement* layerElement);
 
         /*
         *   Returns the image for this layer.

@@ -1,4 +1,4 @@
-#include "TmxMapLib/TmxMap.h"
+#include "TmxMapLib/Map.h"
 #include "catch.hpp"
 
 using namespace TmxMapLib;
@@ -6,7 +6,7 @@ using namespace TmxMapLib;
 //  ===========================================================================
 TEST_CASE("TmxMap TMX filename constructor", "[map]")
 {
-    TmxMap map("map01.tmx");
+    Map map("map01.tmx");
 
     REQUIRE(map.GetWidth() == 20);
     REQUIRE(map.GetHeight() == 16);
@@ -18,6 +18,7 @@ TEST_CASE("TmxMap TMX filename constructor", "[map]")
     REQUIRE(map.GetPropertySet().GetProperty("AllowSave")->GetType() == PropertyType::Bool);
     REQUIRE(map.GetPropertySet().GetProperty("AllowSave")->GetValue() == "true");
     REQUIRE(map.GetPropertySet().GetProperty("AllowSave")->GetBoolValue() == true);
+    REQUIRE(map.GetPropertySet().GetBoolValue("AllowSave", false) == true);
 
     REQUIRE(map.GetPropertySet().GetProperty("Difficulty")->GetName() == "Difficulty");
     REQUIRE(map.GetPropertySet().GetProperty("Difficulty")->GetType() == PropertyType::Int);
@@ -25,12 +26,17 @@ TEST_CASE("TmxMap TMX filename constructor", "[map]")
     REQUIRE(map.GetPropertySet().GetProperty("Difficulty")->GetIntValue() == 2);
     REQUIRE(map.GetPropertySet().GetProperty("Difficulty")->GetDoubleValue() == 2);
     REQUIRE(map.GetPropertySet().GetProperty("Difficulty")->GetFloatValue() == 2.0f);
+    REQUIRE(map.GetPropertySet().GetIntValue("Difficulty", 0) == 2);
+    REQUIRE(map.GetPropertySet().GetDoubleValue("Difficulty", 0) == 2.0);
+    REQUIRE(map.GetPropertySet().GetFloatValue("Difficulty", 0.0f) == 2.0f);
 
     REQUIRE(map.GetPropertySet().GetProperty("LootChance")->GetName() == "LootChance");
     REQUIRE(map.GetPropertySet().GetProperty("LootChance")->GetType() == PropertyType::Float);
     REQUIRE(map.GetPropertySet().GetProperty("LootChance")->GetValue() == "0.5");
     REQUIRE(map.GetPropertySet().GetProperty("LootChance")->GetDoubleValue() == 0.5);
     REQUIRE(map.GetPropertySet().GetProperty("LootChance")->GetFloatValue() == 0.5f);
+    REQUIRE(map.GetPropertySet().GetDoubleValue("LootChance", 0) == 0.5);
+    REQUIRE(map.GetPropertySet().GetFloatValue("LootChance", 0.0f) == 0.5f);
 
     REQUIRE(map.GetPropertySet().GetProperty("Name")->GetName() == "Name");
     REQUIRE(map.GetPropertySet().GetProperty("Name")->GetValue() == "Test Map");

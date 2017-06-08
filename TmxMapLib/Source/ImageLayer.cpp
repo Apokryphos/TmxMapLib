@@ -7,8 +7,11 @@ using namespace tinyxml2;
 namespace TmxMapLib
 {
     //  =======================================================================
-    ImageLayer::ImageLayer(const int tmxOrder, const XMLElement* imageLayerElement)
-        : LayerBase(LayerType::Image, tmxOrder, imageLayerElement)
+    ImageLayer::ImageLayer(
+        const Map* map,
+        const int tmxOrder,
+        const XMLElement* imageLayerElement)
+        : LayerBase(LayerType::Image, map, tmxOrder, imageLayerElement)
     {
         LoadImageLayer(imageLayerElement);
     }

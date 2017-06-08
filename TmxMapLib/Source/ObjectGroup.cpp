@@ -14,8 +14,11 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
-    ObjectGroup::ObjectGroup(const int tmxOrder, const XMLElement* groupElement)
-        : LayerBase(LayerType::Object, tmxOrder, groupElement)
+    ObjectGroup::ObjectGroup(
+        const Map* map,
+        const int tmxOrder,
+        const XMLElement* groupElement)
+        : LayerBase(LayerType::Object, map, tmxOrder, groupElement)
     {
         LoadObjectGroup(groupElement);
     }
@@ -34,7 +37,7 @@ namespace TmxMapLib
         const XMLElement* objectElement = groupElement->FirstChildElement("object");
         while (objectElement != nullptr)
         {
-            mObjects.emplace_back(objectElement);
+            mObjects.emplace_back(this, objectElement);
             objectElement = objectElement->NextSiblingElement("object");
         }
     }
@@ -53,7 +56,7 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
-    const std::vector<Object>& ObjectGroup::GetObjects()
+    const std::vector<Object>& ObjectGroup::GetObjects() const
     {
         return mObjects;
     }

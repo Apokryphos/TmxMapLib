@@ -19,6 +19,58 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
+    bool PropertySet::GetBoolValue(
+        const std::string& propertyName,
+        const bool defaultValue) const
+    {
+        const Property* property = GetProperty(propertyName);
+
+        return
+            property != nullptr ?
+            property->GetBoolValue(defaultValue) :
+            defaultValue;
+    }
+
+    //  =======================================================================
+    double PropertySet::GetDoubleValue(
+        const std::string& propertyName,
+        const double defaultValue) const
+    {
+        const Property* property = GetProperty(propertyName);
+
+        return
+            property != nullptr ?
+            property->GetDoubleValue(defaultValue) :
+            defaultValue;
+    }
+
+    //  =======================================================================
+    float PropertySet::GetFloatValue(
+        const std::string& propertyName,
+        const float defaultValue) const
+    {
+        const Property* property = GetProperty(propertyName);
+
+        return
+            property != nullptr ?
+            property->GetFloatValue(defaultValue) :
+            defaultValue;
+    }
+
+    //  =======================================================================
+    int PropertySet::GetIntValue(
+        const std::string& propertyName,
+        const int defaultValue) const
+    {
+        const Property* property = GetProperty(propertyName);
+
+        return
+            property != nullptr ?
+            property->GetIntValue(defaultValue) :
+            defaultValue;
+    }
+
+    //  =======================================================================
     const Property* PropertySet::GetProperty(const std::string& name) const
     {
         auto p = mProperties.find(name);

@@ -11,6 +11,8 @@ namespace tinyxml2
 
 namespace TmxMapLib
 {
+    class Map;
+
     enum class LayerType
     {
         Tile,
@@ -27,8 +29,9 @@ namespace TmxMapLib
         bool mVisible;
         std::string mName;
         PropertySet mProperties;
+        const Map* mMap;
 
-        friend class TmxMap;
+        friend class Map;
 
         void LoadLayer(const tinyxml2::XMLElement* layerElement);
 
@@ -44,6 +47,7 @@ namespace TmxMapLib
         */
         LayerBase(
             const LayerType layerType,
+            const Map* map,
             const int tmxOrder,
             const tinyxml2::XMLElement* layerElement);
 
@@ -51,6 +55,11 @@ namespace TmxMapLib
         *   Returns the layer type of this layer.
         */
         LayerType GetLayerType() const;
+
+        /*
+        *   Returns the map that owns this layer.
+        */
+        const Map* GetMap() const;
 
         /*
         *   Returns the name of this layer.

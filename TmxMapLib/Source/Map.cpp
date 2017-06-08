@@ -1,5 +1,5 @@
 #include "TmxMapLib/Exceptions.h"
-#include "TmxMapLib/TmxMap.h"
+#include "TmxMapLib/Map.h"
 #include "TmxMapLib/XmlUtil.h"
 #include <tinyxml2.h>
 
@@ -8,7 +8,12 @@ using namespace tinyxml2;
 namespace TmxMapLib
 {
     //  =======================================================================
-    TmxMap::TmxMap(const std::string& filename)
+    Map::Map(const std::string& filename)
+    :   mWidth(0),
+        mHeight(0),
+        mTileWidth(0),
+        mTileHeight(0),
+        mRenderOrder(RenderOrder::RightDown)
     {
         XMLDocument doc;
         if (doc.LoadFile(filename.c_str()) != XMLError::XML_NO_ERROR)
@@ -21,79 +26,97 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
-    int TmxMap::GetHeight() const
+    int Map::GetHeight() const
     {
         return mHeight;
     }
 
     //  =======================================================================
-    const ImageLayer& TmxMap::GetImageLayer(const int index) const
+    const ImageLayer& Map::GetImageLayer(const int index) const
     {
         return mImageLayers.at(index);
     }
 
     //  =======================================================================
-    const std::vector<ImageLayer>& TmxMap::GetImageLayers() const
+    const std::vector<ImageLayer>& Map::GetImageLayers() const
     {
         return mImageLayers;
     }
 
     //  =======================================================================
-    int TmxMap::GetImageLayerCount() const
+    int Map::GetImageLayerCount() const
     {
         return mImageLayers.size();
     }
 
     //  =======================================================================
-    const std::vector<LayerBase*>& TmxMap::GetLayersInTmxOrder() const
+    int Map::GetLayerCount() const
+    {
+        return mTmxOrder.size();
+    }
+
+    //  =======================================================================
+    const std::vector<LayerBase*>& Map::GetLayersInTmxOrder() const
     {
         return mTmxOrder;
     }
 
     //  =======================================================================
-    const ObjectGroup& TmxMap::GetObjectGroup(const int index) const
+    const ObjectGroup& Map::GetObjectGroup(const int index) const
     {
         return mObjectGroups.at(index);
     }
 
     //  =======================================================================
-    int TmxMap::GetObjectGroupCount() const
+    int Map::GetObjectGroupCount() const
     {
         return mObjectGroups.size();
     }
 
     //  =======================================================================
-    const PropertySet& TmxMap::GetPropertySet() const
+    const PropertySet& Map::GetPropertySet() const
     {
         return mProperties;
     }
 
     //  =======================================================================
-    int TmxMap::GetTileHeight() const
+    RenderOrder Map::GetRenderOrder() const
+    {
+        return mRenderOrder;
+    }
+
+    //  =======================================================================
+    int Map::GetTileHeight() const
     {
         return mTileHeight;
     }
 
     //  =======================================================================
-    const TileLayer& TmxMap::GetTileLayer(const int index) const
+    const TileLayer& Map::GetTileLayer(const int index) const
     {
         return mTileLayers.at(index);
     }
 
     //  =======================================================================
-    int TmxMap::GetTileLayerCount() const
+    const std::vector<TileLayer>& Map::GetTileLayers() const
+    {
+        return mTileLayers;
+    }
+
+    //  =======================================================================
+    int Map::GetTileLayerCount() const
     {
         return mTileLayers.size();
     }
 
     //  =======================================================================
-    int TmxMap::GetTileWidth() const
+    int Map::GetTileWidth() const
     {
         return mTileWidth;
     }
 
     //  =======================================================================
-    const Tileset& TmxMap::GetTileset(const int index) const
+    const Tileset& Map::GetTileset(const int index) const
     {
         if (index < 0 || index >= mTilesets.size())
         {
@@ -104,7 +127,7 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
-    const Tileset* TmxMap::GetTilesetByGid(const int gid) const
+    const Tileset* Map::GetTilesetByGid(const int gid) const
     {
         for (size_t t = 0; t < mTilesets.size(); ++t)
         {
@@ -122,19 +145,19 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
-    int TmxMap::GetTilesetCount() const
+    int Map::GetTilesetCount() const
     {
         return mTilesets.size();
     }
 
     //  =======================================================================
-    int TmxMap::GetWidth() const
+    int Map::GetWidth() const
     {
         return mWidth;
     }
 
     //  =======================================================================
-    void TmxMap::LoadLayers(const XMLElement* mapElement)
+    void Map::LoadLayers(const XMLElement* mapElement)
     {
         //  Reserve vectors
         int layerCount = CountElements(mapElement, "layer");
@@ -156,17 +179,17 @@ namespace TmxMapLib
 
             if (elementName == "layer")
             {
-                mTileLayers.emplace_back(tmxOrder++, childElement);
+                mTileLayers.emplace_back(this, tmxOrder++, childElement);
                 mTmxOrder.push_back(&mTileLayers[mTileLayers.size() - 1]);
             }
             else if (elementName == "objectgroup")
             {
-                mObjectGroups.emplace_back(tmxOrder++, childElement);
+                mObjectGroups.emplace_back(this, tmxOrder++, childElement);
                 mTmxOrder.push_back(&mObjectGroups[mObjectGroups.size() - 1]);
             }
             else if (elementName == "imagelayer")
             {
-                mImageLayers.emplace_back(tmxOrder++, childElement);
+                mImageLayers.emplace_back(this, tmxOrder++, childElement);
                 mTmxOrder.push_back(&mImageLayers[mImageLayers.size() - 1]);
             }
 
@@ -175,7 +198,7 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
-    void TmxMap::LoadMap(const XMLElement* mapElement)
+    void Map::LoadMap(const XMLElement* mapElement)
     {
         if (mapElement == nullptr)
         {
@@ -207,12 +230,33 @@ namespace TmxMapLib
             mProperties.LoadProperties(mapElement->FirstChildElement("properties"));
         }
 
+        if (mapElement->Attribute("renderorder"))
+        {
+            std::string renderOrder = mapElement->Attribute("renderorder");
+            if (renderOrder == "right-down")
+            {
+                mRenderOrder = RenderOrder::RightDown;
+            }
+            else if (renderOrder == "right-up")
+            {
+                mRenderOrder = RenderOrder::RightUp;
+            }
+            else if (renderOrder == "left-down")
+            {
+                mRenderOrder = RenderOrder::LeftDown;
+            }
+            else if (renderOrder == "left-up")
+            {
+                mRenderOrder = RenderOrder::LeftUp;
+            }
+        }
+
         LoadTilesets(mapElement);
         LoadLayers(mapElement);
     }
 
     //  =======================================================================
-    void TmxMap::LoadTilesets(const XMLElement* mapElement)
+    void Map::LoadTilesets(const XMLElement* mapElement)
     {
         int tilesetCount = CountElements(mapElement, "tileset");
         mTilesets.reserve(tilesetCount);

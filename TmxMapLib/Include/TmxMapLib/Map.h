@@ -16,13 +16,22 @@ namespace tinyxml2
 
 namespace TmxMapLib
 {
-    class TmxMap
+    enum class RenderOrder
+    {
+        RightDown,
+        RightUp,
+        LeftDown,
+        LeftUp,
+    };
+
+    class Map
     {
     private:
         int mWidth;
         int mHeight;
         int mTileWidth;
         int mTileHeight;
+        RenderOrder mRenderOrder;
         PropertySet mProperties;
 
         std::vector<ImageLayer> mImageLayers;
@@ -41,7 +50,7 @@ namespace TmxMapLib
         /*
         *   Constructs a TmxMap from the specified TMX file.
         */
-        TmxMap(const std::string& filename);
+        Map(const std::string& filename);
 
         /*
         *   Returns the height of this map in tiles.
@@ -63,6 +72,11 @@ namespace TmxMapLib
         *   Returns the number of image layers in this map.
         */
         int GetImageLayerCount() const;
+
+        /*
+        *   Returns the number of layers in this map.
+        */
+        int GetLayerCount() const;
 
         /*
         *   Returns all layers in the map in the same order as the TMX file
@@ -87,6 +101,11 @@ namespace TmxMapLib
         const PropertySet& GetPropertySet() const;
 
         /*
+        *   Returns the order in which the tiles on tile layers are renderered.
+        */
+        RenderOrder GetRenderOrder() const;
+
+        /*
         *   Returns the height of the tiles in this map in pixels.
         */
         int GetTileHeight() const;
@@ -96,6 +115,11 @@ namespace TmxMapLib
         *   Throws an out_of_range exception if the index is out of range.
         */
         const TileLayer& GetTileLayer(const int index) const;
+
+        /*
+        *   Returns all of the tile layers in this map.
+        */
+        const std::vector<TileLayer>& GetTileLayers() const;
 
         /*
         *   Returns the number of tile layers in this map.

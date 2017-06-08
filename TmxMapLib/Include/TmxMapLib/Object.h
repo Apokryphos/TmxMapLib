@@ -15,6 +15,8 @@ namespace tinyxml2
 
 namespace TmxMapLib
 {
+    class ObjectGroup;
+
     enum class ObjectType
     {
         Basic,
@@ -38,6 +40,7 @@ namespace TmxMapLib
         PropertySet mProperties;
         std::vector<Point> mPoints;
         std::unique_ptr<Tile> mTile;
+        const ObjectGroup* mObjectGroup;
 
         void LoadPoints(const tinyxml2::XMLElement* polyElement);
         void LoadObject(const tinyxml2::XMLElement* objectElement);
@@ -47,7 +50,9 @@ namespace TmxMapLib
         /*
         *   Constructs an Object from the specified XML element.
         */
-        Object(const tinyxml2::XMLElement* objectElement);
+        Object(
+            const ObjectGroup* objectGroup,
+            const tinyxml2::XMLElement* objectElement);
 
         /*
         *   Returns the tile for an ObjectType::Tile object or

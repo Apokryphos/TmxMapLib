@@ -7,6 +7,8 @@ namespace TmxMapLib
     {
     private:
         unsigned int mRawGid;
+        int mX;
+        int mY;
 
     public:
 
@@ -14,7 +16,7 @@ namespace TmxMapLib
         *   Constructs a Tile.
         *   The raw GID is the GID before clearing the flip and rotate flags.
         */
-        Tile(const unsigned int rawGid);
+        Tile(const unsigned int rawGid, const int x, const int y);
 
         bool GetFlipDiagonally() const;
         bool GetFlipHorizontally() const;
@@ -30,6 +32,16 @@ namespace TmxMapLib
         *   The raw GID is the GID before clearing the flip and rotate flags.
         */
         unsigned int GetRawGid() const;
+
+        /*
+        *   Returns the tile coordinate X component.
+        */
+        int GetX() const;
+
+        /*
+        *   Returns the tile coordinate Y component.
+        */
+        int GetY() const;
     };
 }
 

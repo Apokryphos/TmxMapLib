@@ -18,8 +18,8 @@ namespace TmxMapLib
         std::unordered_map<std::string, Property> mProperties;
 
         //  Friend classes that need to call LoadProperties
-        friend class TmxMap;
         friend class LayerBase;
+        friend class Map;
         friend class Object;
         friend class Tileset;
         friend class TilesetTile;
@@ -40,6 +40,42 @@ namespace TmxMapLib
         *   Constructs a PropertySet from an XML element.
         */
         PropertySet(const tinyxml2::XMLElement* propertiesElement);
+
+        /*
+        *   Returns the value of the specified property as a bool.
+        *   Returns the default value if the property does not exist or
+        *   the value string cannot be converted.
+        */
+        bool GetBoolValue(
+            const std::string& propertyName,
+            const bool defaultValue) const;
+
+        /*
+        *   Returns the value of the specified property as an double.
+        *   Returns the default value if the property does not exist or
+        *   the value string cannot be converted.
+        */
+        double GetDoubleValue(
+            const std::string& propertyName,
+            const double defaultValue) const;
+
+        /*
+        *   Returns the value of the specified property as an float.
+        *   Returns the default value if the property does not exist or
+        *   the value string cannot be converted.
+        */
+        float GetFloatValue(
+            const std::string& propertyName,
+            const float defaultValue) const;
+
+        /*
+        *   Returns the value of the specified property as an int.
+        *   Returns the default value if the property does not exist or
+        *   the value string cannot be converted.
+        */
+        int GetIntValue(
+            const std::string& propertyName,
+            const int defaultValue) const;
 
         /*
         *   Returns the property with the specified name or null.

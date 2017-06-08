@@ -32,7 +32,10 @@ namespace TmxMapLib
         /*
         *   Constructs an ObjectGroup from the specified XML element.
         */
-        ObjectGroup(const int tmxOrder, const tinyxml2::XMLElement* groupElement);
+        ObjectGroup(
+            const Map* map,
+            const int tmxOrder,
+            const tinyxml2::XMLElement* groupElement);
 
         /*
         *   Returns the object at the specified index or null
@@ -43,7 +46,7 @@ namespace TmxMapLib
         /*
         *   Returns the objects in this group.
         */
-        const std::vector<Object>& GetObjects();
+        const std::vector<Object>& GetObjects() const;
 
         /*
         *   Returns the total number of objects in this group.
