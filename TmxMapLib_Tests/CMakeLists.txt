@@ -1,13 +1,14 @@
 set(TMXMAPLIB_TESTS_SOURCE
-    Tests_Main.cpp
-    Tests_Map.cpp
-    Tests_Property.cpp
+    Source/Tests_Main.cpp
+    Source/Tests_Map.cpp
+    Source/Tests_Property.cpp
 )
 
 include_directories(${TmxMapLib_SOURCE_DIR}/TmxMapLib_Tests/Include)
 include_directories(${TmxMapLib_SOURCE_DIR}/TmxMapLib/Include)
 
 add_executable(TmxMapLib_Tests ${TMXMAPLIB_TESTS_SOURCE})
+include_directories(${CATCH_INCLUDE_DIR})
 target_link_libraries(TmxMapLib_Tests TmxMapLib Catch ${TINYXML2_LIBRARIES})
 
 add_test(tests TmxMapLib_Tests)
