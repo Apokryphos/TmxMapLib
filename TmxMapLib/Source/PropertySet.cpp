@@ -70,6 +70,15 @@ namespace TmxMapLib
             defaultValue;
     }
 
+        std::unordered_map<std::string, Property> mProperties;
+
+
+    //  =======================================================================
+    const std::unordered_map<std::string, Property>& PropertySet::GetProperties() const
+    {
+        return mProperties;
+    }
+
     //  =======================================================================
     const Property* PropertySet::GetProperty(const std::string& name) const
     {

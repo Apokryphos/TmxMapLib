@@ -228,4 +228,17 @@ TEST_CASE("TmxMap TMX filename constructor", "[map]")
     const Object* collisionShape = collisionTile->GetObjectGroup().GetObject(0);
     REQUIRE(collisionShape != nullptr);
 
+    //  Iterate over properties
+    for (auto const pair : map.GetPropertySet().GetProperties())
+    {
+        const std::string propertyName = pair.first;
+
+        bool match =
+            propertyName =="AllowSave" ||
+            propertyName == "Difficulty" ||
+            propertyName == "LootChance" ||
+            propertyName == "Name";
+
+        REQUIRE(match == true);
+    }
 }

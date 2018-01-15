@@ -78,6 +78,11 @@ namespace TmxMapLib
             const int defaultValue) const;
 
         /*
+        *   Returns all properties in this set.
+        */
+        const std::unordered_map<std::string, Property>& GetProperties() const;
+
+        /*
         *   Returns the property with the specified name or null.
         *   if the property doesn't exist.
         */
