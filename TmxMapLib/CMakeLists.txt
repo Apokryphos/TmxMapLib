@@ -45,8 +45,8 @@ include_directories(${TMXMAPLIB_INCLUDE_DIR})
 add_library(TmxMapLib ${TMXMAPLIB_SOURCE} ${TMXMAPLIB_INCLUDE})
 
 target_include_directories(TmxMapLib PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>)
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Include>
+    $<INSTALL_INTERFACE:Include>)
 
 install(TARGETS TmxMapLib
     EXPORT TmxMapLib-targets
