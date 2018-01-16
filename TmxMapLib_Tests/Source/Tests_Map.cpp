@@ -229,7 +229,7 @@ TEST_CASE("TmxMap TMX filename constructor", "[map]")
     REQUIRE(collisionShape != nullptr);
 
     //  Iterate over properties
-    for (auto const pair : map.GetPropertySet().GetProperties())
+    for (const auto pair : map.GetPropertySet().GetProperties())
     {
         const std::string propertyName = pair.first;
 
@@ -240,5 +240,28 @@ TEST_CASE("TmxMap TMX filename constructor", "[map]")
             propertyName == "Name";
 
         REQUIRE(match == true);
+    }
+
+
+    //  Iterate over tilesets
+    for (const auto& tileset : map.GetTilesets())
+    {
+        const std::string tilesetName = tileset.GetName();
+
+        bool match =
+            tilesetName =="embedded_tileset" ||
+            tilesetName == "external_tileset";
+
+        REQUIRE(match == true);
+
+        int tileCount = 0;
+        for (const auto& tile : tileset.GetTiles())
+        {
+            ++tileCount;
+        }
+
+        int expectedTileCount = tilesetName == "embedded_tileset" ? 4 : 0;
+
+        REQUIRE(tileCount == expectedTileCount);
     }
 }

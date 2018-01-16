@@ -50,7 +50,7 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
-    const std::vector<TilesetTile>& Tileset::GetTiles() const
+    const std::unordered_map<int, TilesetTile>& Tileset::GetTiles() const
     {
         return mTiles;
     }
