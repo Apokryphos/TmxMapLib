@@ -39,7 +39,7 @@ namespace TmxMapLib
         std::string mType;
         PropertySet mProperties;
         std::vector<Point> mPoints;
-        std::unique_ptr<Tile> mTile;
+        std::shared_ptr<Tile> mTile;
         const ObjectGroup* mObjectGroup;
 
         void LoadPoints(const tinyxml2::XMLElement* polyElement);

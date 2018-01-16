@@ -82,7 +82,7 @@ namespace TmxMapLib
 
             unsigned int rawGid;
             objectElement->QueryUnsignedAttribute("gid", &rawGid);
-            mTile = std::make_unique<Tile>(
+            mTile = std::make_shared<Tile>(
                 rawGid,
                 mX / mObjectGroup->GetMap()->GetTileWidth(),
                 mY / mObjectGroup->GetMap()->GetTileHeight());
