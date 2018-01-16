@@ -50,6 +50,12 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
+    const std::vector<TilesetTile>& Tileset::GetTiles() const
+    {
+        return mTiles;
+    }
+
+    //  =======================================================================
     int Tileset::GetTileHeight() const
     {
         return mTileHeight;

@@ -63,6 +63,11 @@ namespace TmxMapLib
         const TilesetTile* GetTile(int id) const;
 
         /*
+        *   Returns all tileset tiles in this tileset.
+        */
+        const std::vector<TilesetTile>& GetTiles() const;
+
+        /*
         *   Returns the height in pixels of each tile in this tileset.
         */
         int GetTileHeight() const;

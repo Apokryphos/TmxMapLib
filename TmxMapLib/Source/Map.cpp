@@ -74,6 +74,12 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
+    const std::vector<ObjectGroup>& Map::GetObjectGroups() const
+    {
+        return mObjectGroups;
+    }
+
+    //  =======================================================================
     const PropertySet& Map::GetPropertySet() const
     {
         return mProperties;
@@ -124,6 +130,12 @@ namespace TmxMapLib
         }
 
         return mTilesets[index];
+    }
+
+    //  =======================================================================
+    const std::vector<Tileset>& Map::GetTilesets() const
+    {
+        return mTilesets;
     }
 
     //  =======================================================================

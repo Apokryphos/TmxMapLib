@@ -96,6 +96,11 @@ namespace TmxMapLib
         int GetObjectGroupCount() const;
 
         /*
+        *   Returns all objects in this map.
+        */
+        const std::vector<ObjectGroup>& GetObjectGroups() const;
+
+        /*
         *   Returns the set of properties for this map.
         */
         const PropertySet& GetPropertySet() const;
@@ -136,6 +141,11 @@ namespace TmxMapLib
         *   Throws std::out_of_range if the index is out of bounds.
         */
         const Tileset& GetTileset(const int index) const;
+
+        /*
+        *   Returns all tilesets in this map.
+        */
+        const std::vector<Tileset>& GetTilesets() const;
 
         /*
         *   Returns the tileset containing the specified tile GID or null
