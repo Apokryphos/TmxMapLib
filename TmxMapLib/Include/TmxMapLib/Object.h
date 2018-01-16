@@ -114,12 +114,6 @@ namespace TmxMapLib
         *   Returns the position Y component of this object.
         */
         double GetY() const;
-
-        /*
-        *   Returns the raw global ID if this object is a tile object or -1 if
-        *   it is not.
-        */
-        unsigned int GetRawGid() const;
     };
 }
 
