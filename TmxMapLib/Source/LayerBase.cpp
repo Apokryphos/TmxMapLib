@@ -8,11 +8,12 @@ namespace TmxMapLib
 {
     //  =======================================================================
     LayerBase::LayerBase(const LayerType layerType)
-        :   mLayerType(layerType),
-            mMap(nullptr),
+        :
             mTmxOrder(0),
+            mLayerType(layerType),
             mOpacity(1),
-            mVisible(true)
+            mVisible(true),
+            mMap(nullptr)
     {
     }
 
@@ -23,11 +24,11 @@ namespace TmxMapLib
         const int tmxOrder,
         const XMLElement* layerElement)
         :
-            mLayerType(layerType),
-            mMap(map),
             mTmxOrder(tmxOrder),
+            mLayerType(layerType),
             mOpacity(1),
-            mVisible(true)
+            mVisible(true),
+            mMap(map)
     {
         LoadLayer(layerElement);
     }

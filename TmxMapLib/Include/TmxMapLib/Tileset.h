@@ -39,7 +39,7 @@ namespace TmxMapLib
         /*
         *   Returns the first global tile ID for this tileset.
         */
-        const int GetFirstGid() const;
+        int GetFirstGid() const;
 
         /*
         *   Returns the image for this tileset.

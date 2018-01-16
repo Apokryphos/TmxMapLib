@@ -41,7 +41,7 @@ namespace TmxMapLib
         *   Returns the tile at the specified index or null
         *   if the coordinate is out of range.
         */
-        const Tile* GetTile(const int index) const;
+        const Tile* GetTile(const size_t index) const;
 
         /*
         *   Returns the tile at the specified coordinate or null

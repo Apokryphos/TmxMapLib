@@ -43,9 +43,9 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
-    const Object* ObjectGroup::GetObject(const int index) const
+    const Object* ObjectGroup::GetObject(const size_t index) const
     {
-        if (index >= 0 && index < mObjects.size())
+        if (index < mObjects.size())
         {
             return &mObjects[index];
         }

@@ -41,7 +41,7 @@ namespace TmxMapLib
         *   Returns the object at the specified index or null
         *   if the index is out of range.
         */
-        const Object* GetObject(const int index) const;
+        const Object* GetObject(const size_t index) const;
 
         /*
         *   Returns the objects in this group.

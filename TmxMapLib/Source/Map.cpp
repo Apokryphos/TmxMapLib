@@ -122,9 +122,9 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
-    const Tileset& Map::GetTileset(const int index) const
+    const Tileset& Map::GetTileset(const size_t index) const
     {
-        if (index < 0 || index >= mTilesets.size())
+        if (index >= mTilesets.size())
         {
             throw std::out_of_range("Index is out of range.");
         }

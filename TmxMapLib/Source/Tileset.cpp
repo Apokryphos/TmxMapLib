@@ -15,7 +15,7 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
-    const int Tileset::GetFirstGid() const
+    int Tileset::GetFirstGid() const
     {
         return mFirstGid;
     }

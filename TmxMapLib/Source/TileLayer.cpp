@@ -39,9 +39,9 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
-    const Tile* TileLayer::GetTile(const int index) const
+    const Tile* TileLayer::GetTile(const size_t index) const
     {
-        if (index >= 0 && index < mTiles.size())
+        if (index < mTiles.size())
         {
             return &mTiles[index];
         }
@@ -98,7 +98,7 @@ namespace TmxMapLib
             throw XmlElementException("data");
         }
 
-        int tileCount = mWidth * mHeight;
+        size_t tileCount = mWidth * mHeight;
 
         //  Store raw tile GIDs in vector
         std::vector<unsigned int> rawGids;

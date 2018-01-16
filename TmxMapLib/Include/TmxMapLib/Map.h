@@ -140,7 +140,7 @@ namespace TmxMapLib
         *   Returns the tileset at the specified index.
         *   Throws std::out_of_range if the index is out of bounds.
         */
-        const Tileset& GetTileset(const int index) const;
+        const Tileset& GetTileset(const size_t index) const;
 
         /*
         *   Returns all tilesets in this map.
