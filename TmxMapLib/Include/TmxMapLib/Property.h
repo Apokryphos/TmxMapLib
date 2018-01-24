@@ -16,7 +16,7 @@ namespace TmxMapLib
         Bool,
         Int,
         Float,
-        //Color,
+        Color,
         //File,
     };
 
