@@ -70,9 +70,6 @@ namespace TmxMapLib
             defaultValue;
     }
 
-        std::unordered_map<std::string, Property> mProperties;
-
-
     //  =======================================================================
     const std::unordered_map<std::string, Property>& PropertySet::GetProperties() const
     {
@@ -84,6 +81,19 @@ namespace TmxMapLib
     {
         auto p = mProperties.find(name);
         return p != mProperties.end() ? &p->second : nullptr;
+    }
+
+    //  =======================================================================
+    std::string PropertySet::GetValue(
+        const std::string& propertyName,
+        const std::string& defaultValue) const
+    {
+        const Property* property = GetProperty(propertyName);
+
+        return
+            property != nullptr ?
+            property->GetValue() :
+            defaultValue;
     }
 
     //  =======================================================================

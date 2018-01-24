@@ -89,6 +89,14 @@ namespace TmxMapLib
         const Property* GetProperty(const std::string& name) const;
 
         /*
+        *   Returns the value of the specified property.
+        *   Returns the default value if the property does not exist.
+        */
+        std::string GetValue(
+            const std::string& propertyName,
+            const std::string& defaultValue) const;
+
+        /*
         *   Checks if the property with the specified name exists.
         */
         bool HasProperty(const std::string& name) const;
