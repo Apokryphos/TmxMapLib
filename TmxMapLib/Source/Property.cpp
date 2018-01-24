@@ -63,6 +63,10 @@ namespace TmxMapLib
             {
                 mType = PropertyType::Int;
             }
+            else if (type == "color")
+            {
+                mType = PropertyType::Color;
+            }
             else
             {
                 throw std::runtime_error("Property type case is not implemented.");
