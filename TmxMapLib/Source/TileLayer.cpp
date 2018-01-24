@@ -39,6 +39,12 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
+    int TileLayer::GetHeight() const
+    {
+        return mHeight;
+    }
+
+    //  =======================================================================
     const Tile* TileLayer::GetTile(const size_t index) const
     {
         if (index < mTiles.size())
@@ -55,6 +61,12 @@ namespace TmxMapLib
     const Tile* TileLayer::GetTile(const int x, const int y) const
     {
         return GetTile(y * mWidth + x);
+    }
+
+    //  =======================================================================
+    int TileLayer::GetWidth() const
+    {
+        return mWidth;
     }
 
     //  =======================================================================
