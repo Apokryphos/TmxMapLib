@@ -86,22 +86,22 @@ namespace TmxMapLib
             mName = tilesetElement->Attribute("name");
         }
 
-        if (tilesetElement->QueryIntAttribute("tilewidth", &mTileWidth) != XML_NO_ERROR)
+        if (tilesetElement->QueryIntAttribute("tilewidth", &mTileWidth) != XML_SUCCESS)
         {
             throw XmlAttributeException("tilewidth");
         }
 
-        if (tilesetElement->QueryIntAttribute("tileheight", &mTileHeight) != XML_NO_ERROR)
+        if (tilesetElement->QueryIntAttribute("tileheight", &mTileHeight) != XML_SUCCESS)
         {
             throw XmlAttributeException("tileheight");
         }
 
-        if (tilesetElement->QueryIntAttribute("tilecount", &mTileCount) != XML_NO_ERROR)
+        if (tilesetElement->QueryIntAttribute("tilecount", &mTileCount) != XML_SUCCESS)
         {
             throw XmlAttributeException("tilecount");
         }
 
-        if (tilesetElement->QueryIntAttribute("columns", &mColumns) != XML_NO_ERROR)
+        if (tilesetElement->QueryIntAttribute("columns", &mColumns) != XML_SUCCESS)
         {
             throw XmlAttributeException("columns");
         }
@@ -119,7 +119,7 @@ namespace TmxMapLib
         while (tileElement != nullptr)
         {
             int id;
-            if (tileElement->QueryIntAttribute("id", &id) != XML_NO_ERROR)
+            if (tileElement->QueryIntAttribute("id", &id) != XML_SUCCESS)
             {
                 throw XmlAttributeException("id");
             }

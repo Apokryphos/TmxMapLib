@@ -44,7 +44,7 @@ namespace TmxMapLib
             throw NullArgumentException("Tileset element cannot be null.");
         }
 
-        if (tilesetTileElement->QueryIntAttribute("id", &mId) != XML_NO_ERROR)
+        if (tilesetTileElement->QueryIntAttribute("id", &mId) != XML_SUCCESS)
         {
             throw XmlAttributeException("id");
         }

@@ -52,12 +52,12 @@ namespace TmxMapLib
             throw XmlAttributeException("source");
         }
 
-        if (imageElement->QueryIntAttribute("width", &mWidth) != XML_NO_ERROR)
+        if (imageElement->QueryIntAttribute("width", &mWidth) != XML_SUCCESS)
         {
             throw XmlAttributeException("width");
         }
 
-        if (imageElement->QueryIntAttribute("height", &mHeight) != XML_NO_ERROR)
+        if (imageElement->QueryIntAttribute("height", &mHeight) != XML_SUCCESS)
         {
             throw XmlAttributeException("height");
         }

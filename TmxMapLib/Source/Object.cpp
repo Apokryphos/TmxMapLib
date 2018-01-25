@@ -46,7 +46,7 @@ namespace TmxMapLib
     //  =======================================================================
     void Object::LoadObject(const tinyxml2::XMLElement* objectElement)
     {
-        if (objectElement->QueryIntAttribute("id", &mId) != XML_NO_ERROR)
+        if (objectElement->QueryIntAttribute("id", &mId) != XML_SUCCESS)
         {
             throw XmlAttributeException("id");
         }
@@ -61,12 +61,12 @@ namespace TmxMapLib
             mType = objectElement->Attribute("type");
         }
 
-        if (objectElement->QueryDoubleAttribute("x", &mX) != XML_NO_ERROR)
+        if (objectElement->QueryDoubleAttribute("x", &mX) != XML_SUCCESS)
         {
             throw XmlAttributeException("x");
         }
 
-        if (objectElement->QueryDoubleAttribute("y", &mY) != XML_NO_ERROR)
+        if (objectElement->QueryDoubleAttribute("y", &mY) != XML_SUCCESS)
         {
             throw XmlAttributeException("y");
         }

@@ -16,7 +16,7 @@ namespace TmxMapLib
         mRenderOrder(RenderOrder::RightDown)
     {
         XMLDocument doc;
-        if (doc.LoadFile(filename.c_str()) != XMLError::XML_NO_ERROR)
+        if (doc.LoadFile(filename.c_str()) != XMLError::XML_SUCCESS)
         {
             doc.PrintError();
             throw XmlDocumentException(filename);
@@ -217,22 +217,22 @@ namespace TmxMapLib
             throw NullArgumentException("mapElement");
         }
 
-        if (mapElement->QueryIntAttribute("width", &mWidth) != XML_NO_ERROR)
+        if (mapElement->QueryIntAttribute("width", &mWidth) != XML_SUCCESS)
         {
             throw XmlAttributeException("width");
         }
 
-        if (mapElement->QueryIntAttribute("height", &mHeight) != XML_NO_ERROR)
+        if (mapElement->QueryIntAttribute("height", &mHeight) != XML_SUCCESS)
         {
             throw XmlAttributeException("height");
         }
 
-        if (mapElement->QueryIntAttribute("tilewidth", &mTileWidth) != XML_NO_ERROR)
+        if (mapElement->QueryIntAttribute("tilewidth", &mTileWidth) != XML_SUCCESS)
         {
             throw XmlAttributeException("tilewidth");
         }
 
-        if (mapElement->QueryIntAttribute("tileheight", &mTileHeight) != XML_NO_ERROR)
+        if (mapElement->QueryIntAttribute("tileheight", &mTileHeight) != XML_SUCCESS)
         {
             throw XmlAttributeException("tileheight");
         }
@@ -277,7 +277,7 @@ namespace TmxMapLib
         while (tilesetElement != nullptr)
         {
             int firstGid = 0;
-            if (tilesetElement->QueryIntAttribute("firstgid", &firstGid) != XML_NO_ERROR)
+            if (tilesetElement->QueryIntAttribute("firstgid", &firstGid) != XML_SUCCESS)
             {
                 throw XmlAttributeException("firstgid");
             }
@@ -288,7 +288,7 @@ namespace TmxMapLib
                 std::string source = tilesetElement->Attribute("source");
 
                 XMLDocument doc;
-                if (doc.LoadFile(source.c_str()) != XMLError::XML_NO_ERROR)
+                if (doc.LoadFile(source.c_str()) != XMLError::XML_SUCCESS)
                 {
                     doc.PrintError();
                     throw XmlDocumentException(source);

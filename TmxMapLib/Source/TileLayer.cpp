@@ -83,12 +83,12 @@ namespace TmxMapLib
             throw NullArgumentException("layerElement");
         }
 
-        if (layerElement->QueryIntAttribute("width", &mWidth) != XML_NO_ERROR)
+        if (layerElement->QueryIntAttribute("width", &mWidth) != XML_SUCCESS)
         {
             throw XmlAttributeException("width");
         }
 
-        if (layerElement->QueryIntAttribute("height", &mHeight) != XML_NO_ERROR)
+        if (layerElement->QueryIntAttribute("height", &mHeight) != XML_SUCCESS)
         {
             throw XmlAttributeException("height");
         }

@@ -32,12 +32,12 @@ namespace TmxMapLib
             throw NullArgumentException("frameElement");
         }
 
-        if (frameElement->QueryIntAttribute("tileid", &mTileId) != XML_NO_ERROR)
+        if (frameElement->QueryIntAttribute("tileid", &mTileId) != XML_SUCCESS)
         {
             throw XmlAttributeException("tileid");
         }
 
-        if (frameElement->QueryIntAttribute("duration", &mDuration) != XML_NO_ERROR)
+        if (frameElement->QueryIntAttribute("duration", &mDuration) != XML_SUCCESS)
         {
             throw XmlAttributeException("duration");
         }
