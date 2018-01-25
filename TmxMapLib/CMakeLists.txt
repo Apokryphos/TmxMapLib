@@ -52,6 +52,14 @@ target_include_directories(TmxMapLib PUBLIC
 
 target_link_libraries(TmxMapLib tinyxml2)
 
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    target_compile_options(${PROJECT_NAME} PRIVATE "-Wall")
+    target_compile_options(${PROJECT_NAME} PRIVATE "-Wextra")
+    #target_compile_options(${PROJECT_NAME} PRIVATE "-Werror")
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+    target_compile_options(${PROJECT_NAME} PRIVATE "/Wall")
+endif()
+
 install(TARGETS TmxMapLib
     EXPORT TmxMapLib-targets
     ARCHIVE DESTINATION lib
