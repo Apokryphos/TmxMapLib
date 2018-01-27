@@ -4,6 +4,7 @@
 #include "Property.h"
 #include <unordered_map>
 #include <string>
+#include <vector>
 
 namespace tinyxml2
 {
@@ -80,7 +81,7 @@ namespace TmxMapLib
         /*
         *   Returns all properties in this set.
         */
-        const std::unordered_map<std::string, Property>& GetProperties() const;
+        std::vector<const Property*> GetProperties() const;
 
         /*
         *   Returns the property with the specified name or null.

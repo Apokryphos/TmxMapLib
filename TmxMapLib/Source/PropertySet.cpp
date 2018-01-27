@@ -2,6 +2,7 @@
 #include "TmxMapLib/PropertySet.h"
 #include "TmxMapLib/XmlUtil.h"
 #include <tinyxml2.h>
+#include <vector>
 
 using namespace tinyxml2;
 
@@ -71,9 +72,16 @@ namespace TmxMapLib
     }
 
     //  =======================================================================
-    const std::unordered_map<std::string, Property>& PropertySet::GetProperties() const
+    std::vector<const Property*> PropertySet::GetProperties() const
     {
-        return mProperties;
+        std::vector<const Property*> properties;
+
+        for (const auto& pair : mProperties)
+        {
+            properties.push_back(&pair.second);
+        }
+
+        return properties;
     }
 
     //  =======================================================================

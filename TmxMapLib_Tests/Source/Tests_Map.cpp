@@ -229,9 +229,9 @@ TEST_CASE("TmxMap TMX filename constructor", "[map]")
     REQUIRE(collisionShape != nullptr);
 
     //  Iterate over properties
-    for (const auto pair : map.GetPropertySet().GetProperties())
+    for (const auto property : map.GetPropertySet().GetProperties())
     {
-        const std::string propertyName = pair.first;
+        const std::string propertyName = property->GetName();
 
         bool match =
             propertyName =="AllowSave" ||

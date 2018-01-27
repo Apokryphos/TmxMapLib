@@ -11,4 +11,5 @@ target_include_directories(Catch INTERFACE ${CATCH_INCLUDE_DIR})
 enable_testing()
 
 add_subdirectory(TmxMapLib)
+add_subdirectory(TmxMapLib_Example)
 add_subdirectory(TmxMapLib_Tests)
