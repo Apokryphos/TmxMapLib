@@ -34,6 +34,8 @@ namespace TmxMapLib
         RenderOrder mRenderOrder;
         PropertySet mProperties;
 
+        std::string mPath;
+
         std::vector<ImageLayer> mImageLayers;
         std::vector<TileLayer> mTileLayers;
         std::vector<Tileset> mTilesets;
@@ -50,7 +52,7 @@ namespace TmxMapLib
         /*
         *   Constructs a TmxMap from the specified TMX file.
         */
-        Map(const std::string& filename);
+        Map(const std::string& fullPath);
 
         /*
         *   Returns the height of this map in tiles.

@@ -1,6 +1,7 @@
 #include "TmxMapLib/Exceptions.h"
 #include "TmxMapLib/Map.h"
 #include "TmxMapLib/XmlUtil.h"
+#include <iostream>
 #include <tinyxml2.h>
 
 using namespace tinyxml2;
@@ -8,18 +9,34 @@ using namespace tinyxml2;
 namespace TmxMapLib
 {
     //  =======================================================================
-    Map::Map(const std::string& filename)
+    static void GetPath(const std::string& fullPath, std::string& path)
+    {
+        const size_t s = fullPath.find_last_of("/\\");
+
+        if (s == std::string::npos) {
+            path = "";
+        } else {
+            path = fullPath.substr(0, s) + "/";
+        }
+    }
+
+    //  =======================================================================
+    Map::Map(const std::string& fullPath)
     :   mWidth(0),
         mHeight(0),
         mTileWidth(0),
         mTileHeight(0),
         mRenderOrder(RenderOrder::RightDown)
     {
+        std::string filename;
+
+        GetPath(fullPath, mPath);
+
         XMLDocument doc;
-        if (doc.LoadFile(filename.c_str()) != XMLError::XML_SUCCESS)
+        if (doc.LoadFile(fullPath.c_str()) != XMLError::XML_SUCCESS)
         {
             doc.PrintError();
-            throw XmlDocumentException(filename);
+            throw XmlDocumentException(fullPath);
         }
 
         LoadMap(doc.FirstChildElement("map"));
@@ -287,11 +304,13 @@ namespace TmxMapLib
             {
                 std::string source = tilesetElement->Attribute("source");
 
+                std::string fullPath = mPath + source;
+
                 XMLDocument doc;
-                if (doc.LoadFile(source.c_str()) != XMLError::XML_SUCCESS)
+                if (doc.LoadFile(fullPath.c_str()) != XMLError::XML_SUCCESS)
                 {
                     doc.PrintError();
-                    throw XmlDocumentException(source);
+                    throw XmlDocumentException(fullPath);
                 }
 
                 XMLElement* extTilesetElement = doc.FirstChildElement("tileset");
@@ -300,7 +319,7 @@ namespace TmxMapLib
             }
             else
             {
-                //  Imbedded tileset
+                //  Embedded tileset
                 mTilesets.emplace_back(firstGid, tilesetElement);
             }
 
