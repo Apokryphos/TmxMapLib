@@ -163,12 +163,12 @@ TEST_CASE("TmxMap TMX filename constructor", "[map]")
     REQUIRE(map.getObjectGroup(0).getObject(2)->getX() == 80.5);
     REQUIRE(map.getObjectGroup(0).getObject(2)->getY() == 51);
     REQUIRE(map.getObjectGroup(0).getObject(2)->getPointCount() == 8);
-    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[0].X == 0);
-    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[0].Y == 0);
-    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[1].X == 12);
-    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[1].Y == 64.5);
-    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[2].X == 39);
-    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[2].Y == 83.5);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[0].x == 0);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[0].y == 0);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[1].x == 12);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[1].y == 64.5);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[2].x == 39);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[2].y == 83.5);
 
     //  Polygon object
     REQUIRE(map.getObjectGroup(0).getObject(3)->getId() == 7);
@@ -179,10 +179,10 @@ TEST_CASE("TmxMap TMX filename constructor", "[map]")
     REQUIRE(map.getObjectGroup(0).getObject(3)->getX() == 225.5);
     REQUIRE(map.getObjectGroup(0).getObject(3)->getY() == 169.5);
     REQUIRE(map.getObjectGroup(0).getObject(3)->getPointCount() == 4);
-    REQUIRE(map.getObjectGroup(0).getObject(3)->getPoints()[0].X == 0);
-    REQUIRE(map.getObjectGroup(0).getObject(3)->getPoints()[0].Y == 0);
-    REQUIRE(map.getObjectGroup(0).getObject(3)->getPoints()[1].X == -38);
-    REQUIRE(map.getObjectGroup(0).getObject(3)->getPoints()[1].Y == 57.5);
+    REQUIRE(map.getObjectGroup(0).getObject(3)->getPoints()[0].x == 0);
+    REQUIRE(map.getObjectGroup(0).getObject(3)->getPoints()[0].y == 0);
+    REQUIRE(map.getObjectGroup(0).getObject(3)->getPoints()[1].x == -38);
+    REQUIRE(map.getObjectGroup(0).getObject(3)->getPoints()[1].y == 57.5);
 
     //  Image layers
     REQUIRE(map.getImageLayerCount() == 1);
