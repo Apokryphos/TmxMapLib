@@ -3,74 +3,74 @@
 
 using namespace TmxMapLib;
 
-//  ===========================================================================
+//  ===============================================================================
 TEST_CASE("Property", "[property]")
 {
     Property property("Text", "Hello.", PropertyType::String);
-    REQUIRE(property.GetName() == "Text");
-    REQUIRE(property.GetValue() == "Hello.");
-    REQUIRE_THROWS(property.GetBoolValue() == false);
-    REQUIRE_THROWS(property.GetDoubleValue() == 0);
-    REQUIRE_THROWS(property.GetFloatValue() == 0);
-    REQUIRE_THROWS(property.GetIntValue() == 0);
+    REQUIRE(property.getName() == "Text");
+    REQUIRE(property.getValue() == "Hello.");
+    REQUIRE_THROWS(property.getBoolValue() == false);
+    REQUIRE_THROWS(property.getDoubleValue() == 0);
+    REQUIRE_THROWS(property.getFloatValue() == 0);
+    REQUIRE_THROWS(property.getIntValue() == 0);
     bool textBool = false;
-    property.QueryBoolValue(textBool, true);
+    property.queryBoolValue(textBool, true);
     REQUIRE(textBool == true);
     double textDouble = 0;
-    property.QueryDoubleValue(textDouble, 25.5);
+    property.queryDoubleValue(textDouble, 25.5);
     REQUIRE(textDouble == 25.5);
     float textFloat = 0;
-    property.QueryFloatValue(textFloat, 2.5f);
+    property.queryFloatValue(textFloat, 2.5f);
     REQUIRE(textFloat == 2.5f);
     int textInt = 0;
-    property.QueryIntValue(textInt, 50);
+    property.queryIntValue(textInt, 50);
     REQUIRE(textInt == 50);
 
     property = Property("Enabled", "true", PropertyType::Bool);
-    REQUIRE(property.GetName() == "Enabled");
-    REQUIRE(property.GetValue() == "true");
-    REQUIRE(property.GetBoolValue() == true);
+    REQUIRE(property.getName() == "Enabled");
+    REQUIRE(property.getValue() == "true");
+    REQUIRE(property.getBoolValue() == true);
     bool enabled = false;
-    property.QueryBoolValue(enabled);
+    property.queryBoolValue(enabled);
     REQUIRE(enabled == true);
     enabled = false;
-    property.QueryBoolValue(enabled, false);
+    property.queryBoolValue(enabled, false);
     REQUIRE(enabled == true);
-    REQUIRE_THROWS(property.GetDoubleValue() == 0);
-    REQUIRE_THROWS(property.GetFloatValue() == 0);
-    REQUIRE_THROWS(property.GetIntValue() == 0);
+    REQUIRE_THROWS(property.getDoubleValue() == 0);
+    REQUIRE_THROWS(property.getFloatValue() == 0);
+    REQUIRE_THROWS(property.getIntValue() == 0);
 
     property = Property("Chance", "23.45", PropertyType::Float);
-    REQUIRE(property.GetName() == "Chance");
-    REQUIRE(property.GetValue() == "23.45");
-    REQUIRE(property.GetIntValue() == 23);
-    REQUIRE(property.GetDoubleValue() == 23.45);
-    REQUIRE(property.GetFloatValue() == 23.45f);
+    REQUIRE(property.getName() == "Chance");
+    REQUIRE(property.getValue() == "23.45");
+    REQUIRE(property.getIntValue() == 23);
+    REQUIRE(property.getDoubleValue() == 23.45);
+    REQUIRE(property.getFloatValue() == 23.45f);
     double chanceDouble;
-    property.QueryDoubleValue(chanceDouble);
+    property.queryDoubleValue(chanceDouble);
     REQUIRE(chanceDouble == 23.45);
     chanceDouble = 0;
-    property.QueryDoubleValue(chanceDouble, 0);
+    property.queryDoubleValue(chanceDouble, 0);
     REQUIRE(chanceDouble == 23.45);
     float chance;
-    property.QueryFloatValue(chance);
+    property.queryFloatValue(chance);
     REQUIRE(chance == 23.45f);
     chance = 0;
-    property.QueryFloatValue(chance, 0);
+    property.queryFloatValue(chance, 0);
     REQUIRE(chance == 23.45f);
-    REQUIRE_THROWS(property.GetBoolValue() == false);
+    REQUIRE_THROWS(property.getBoolValue() == false);
 
     property = Property("Health", "521", PropertyType::Int);
-    REQUIRE(property.GetName() == "Health");
-    REQUIRE(property.GetValue() == "521");
-    REQUIRE(property.GetIntValue() == 521);
-    REQUIRE(property.GetDoubleValue() == 521);
-    REQUIRE(property.GetFloatValue() == 521);
+    REQUIRE(property.getName() == "Health");
+    REQUIRE(property.getValue() == "521");
+    REQUIRE(property.getIntValue() == 521);
+    REQUIRE(property.getDoubleValue() == 521);
+    REQUIRE(property.getFloatValue() == 521);
     int health = 0;
-    property.QueryIntValue(health);
+    property.queryIntValue(health);
     REQUIRE(health == 521);
     health = 0;
-    property.QueryIntValue(health, 0);
+    property.queryIntValue(health, 0);
     REQUIRE(health == 521);
-    REQUIRE_THROWS(property.GetBoolValue() == false);
+    REQUIRE_THROWS(property.getBoolValue() == false);
 }

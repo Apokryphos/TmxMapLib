@@ -6,67 +6,59 @@ using namespace tinyxml2;
 
 namespace TmxMapLib
 {
-    //  =======================================================================
-    TilesetTile::TilesetTile(const XMLElement* tilesetTileElement)
-    {
-        LoadTilesetTile(tilesetTileElement);
+//  ===========================================================================
+TilesetTile::TilesetTile(const XMLElement* tilesetTileElement) {
+    this->loadTilesetTile(tilesetTileElement);
+}
+
+//  ===========================================================================
+const Animation& TilesetTile::getAnimation() const {
+    return mAnimation;
+}
+
+//  ===========================================================================
+int TilesetTile::getId() const {
+    return mId;
+}
+
+//  ===========================================================================
+const ObjectGroup& TilesetTile::getObjectGroup() const {
+    return mObjectGroup;
+}
+
+//  ===========================================================================
+const PropertySet& TilesetTile::getPropertySet() const {
+    return mProperties;
+}
+
+//  ===========================================================================
+void TilesetTile::loadTilesetTile(const XMLElement* tilesetTileElement) {
+    if (tilesetTileElement == nullptr) {
+        throw NullArgumentException("Tileset element cannot be null.");
     }
 
-    //  =======================================================================
-    const Animation& TilesetTile::GetAnimation() const
-    {
-        return mAnimation;
+    if (tilesetTileElement->QueryIntAttribute("id", &mId) != XML_SUCCESS) {
+        throw XmlAttributeException("id");
     }
 
-    //  =======================================================================
-    int TilesetTile::GetId() const
-    {
-        return mId;
+    //  Tileset tile level properties
+    if (tilesetTileElement->FirstChildElement("properties")) {
+        mProperties.loadProperties(
+            tilesetTileElement->FirstChildElement("properties"));
     }
 
-    //  =======================================================================
-    const ObjectGroup& TilesetTile::GetObjectGroup() const
-    {
-        return mObjectGroup;
+    //  Animation
+    const XMLElement* animElement =
+        tilesetTileElement->FirstChildElement("animation");
+    if (animElement != nullptr) {
+        mAnimation.loadAnimation(animElement);
     }
 
-    //  =======================================================================
-    const PropertySet& TilesetTile::GetPropertySet() const
-    {
-        return mProperties;
+    //  Object group (collision shapes)
+    const XMLElement* groupElement =
+        tilesetTileElement->FirstChildElement("objectgroup");
+    if (groupElement != nullptr) {
+        mObjectGroup.loadObjectGroup(groupElement);
     }
-
-    //  =======================================================================
-    void TilesetTile::LoadTilesetTile(const XMLElement* tilesetTileElement)
-    {
-        if (tilesetTileElement == nullptr)
-        {
-            throw NullArgumentException("Tileset element cannot be null.");
-        }
-
-        if (tilesetTileElement->QueryIntAttribute("id", &mId) != XML_SUCCESS)
-        {
-            throw XmlAttributeException("id");
-        }
-
-        //  Tileset tile level properties
-        if (tilesetTileElement->FirstChildElement("properties"))
-        {
-            mProperties.LoadProperties(tilesetTileElement->FirstChildElement("properties"));
-        }
-
-        //  Animation
-        const XMLElement* animElement = tilesetTileElement->FirstChildElement("animation");
-        if (animElement != nullptr)
-        {
-            mAnimation.LoadAnimation(animElement);
-        }
-
-        //  Object group (collision shapes)
-        const XMLElement* groupElement = tilesetTileElement->FirstChildElement("objectgroup");
-        if (groupElement != nullptr)
-        {
-            mObjectGroup.LoadObjectGroup(groupElement);
-        }
-    }
+}
 }

@@ -6,50 +6,50 @@
 
 namespace tinyxml2
 {
-    class XMLElement;
+class XMLElement;
 }
 
 namespace TmxMapLib
 {
-    class ObjectGroup : public LayerBase
-    {
-    private:
-        std::vector<Object> mObjects;
+class ObjectGroup : public LayerBase
+{
+private:
+    std::vector<Object> mObjects;
 
-        //  Friend classes that need to call LoadObjectGroup
-        friend class TilesetTile;
+    //  Friend classes that need to call LoadObjectGroup
+    friend class TilesetTile;
 
-        void LoadObjectGroup(const tinyxml2::XMLElement* groupElement);
+    void loadObjectGroup(const tinyxml2::XMLElement* groupElement);
 
-    public:
+public:
 
-        /*
-        *   Constructs an empty ObjectGroup.
-        */
-        ObjectGroup();
+    /*
+    *   Constructs an empty ObjectGroup.
+    */
+    ObjectGroup();
 
-        /*
-        *   Constructs an ObjectGroup from the specified XML element.
-        */
-        ObjectGroup(
-            const Map* map,
-            const int tmxOrder,
-            const tinyxml2::XMLElement* groupElement);
+    /*
+    *   Constructs an ObjectGroup from the specified XML element.
+    */
+    ObjectGroup(
+        const Map* map,
+        const int tmxOrder,
+        const tinyxml2::XMLElement* groupElement);
 
-        /*
-        *   Returns the object at the specified index or null
-        *   if the index is out of range.
-        */
-        const Object* GetObject(const size_t index) const;
+    /*
+    *   Returns the object at the specified index or null
+    *   if the index is out of range.
+    */
+    const Object* getObject(const size_t index) const;
 
-        /*
-        *   Returns the objects in this group.
-        */
-        const std::vector<Object>& GetObjects() const;
+    /*
+    *   Returns the objects in this group.
+    */
+    const std::vector<Object>& getObjects() const;
 
-        /*
-        *   Returns the total number of objects in this group.
-        */
-        int GetObjectCount() const;
-    };
+    /*
+    *   Returns the total number of objects in this group.
+    */
+    int getObjectCount() const;
+};
 }

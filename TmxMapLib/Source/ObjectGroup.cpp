@@ -7,63 +7,52 @@ using namespace tinyxml2;
 
 namespace TmxMapLib
 {
-    //  =======================================================================
-    ObjectGroup::ObjectGroup()
-        : LayerBase(LayerType::Object)
-    {
+//  ===========================================================================
+ObjectGroup::ObjectGroup()
+    : LayerBase(LayerType::Object) {
+}
+
+//  ===========================================================================
+ObjectGroup::ObjectGroup(
+    const Map* map,
+    const int tmxOrder,
+    const XMLElement* groupElement)
+    : LayerBase(LayerType::Object, map, tmxOrder, groupElement) {
+    this->loadObjectGroup(groupElement);
+}
+
+//  ===========================================================================
+const Object* ObjectGroup::getObject(const size_t index) const {
+    if (index < mObjects.size()) {
+        return &mObjects[index];
+    } else {
+        return nullptr;
+    }
+}
+
+//  ===========================================================================
+const std::vector<Object>& ObjectGroup::getObjects() const {
+    return mObjects;
+}
+
+//  ===========================================================================
+int ObjectGroup::getObjectCount() const {
+    return mObjects.size();
+}
+
+//  ===========================================================================
+void ObjectGroup::loadObjectGroup(const XMLElement* groupElement) {
+    if (groupElement == nullptr) {
+        throw NullArgumentException("groupElement");
     }
 
-    //  =======================================================================
-    ObjectGroup::ObjectGroup(
-        const Map* map,
-        const int tmxOrder,
-        const XMLElement* groupElement)
-        : LayerBase(LayerType::Object, map, tmxOrder, groupElement)
-    {
-        LoadObjectGroup(groupElement);
+    int objectCount = countElements(groupElement, "object");
+    mObjects.reserve(objectCount);
+
+    const XMLElement* objectElement = groupElement->FirstChildElement("object");
+    while (objectElement != nullptr) {
+        mObjects.emplace_back(this, objectElement);
+        objectElement = objectElement->NextSiblingElement("object");
     }
-
-    //  =======================================================================
-    void ObjectGroup::LoadObjectGroup(const XMLElement* groupElement)
-    {
-        if (groupElement == nullptr)
-        {
-            throw NullArgumentException("groupElement");
-        }
-
-        int objectCount = CountElements(groupElement, "object");
-        mObjects.reserve(objectCount);
-
-        const XMLElement* objectElement = groupElement->FirstChildElement("object");
-        while (objectElement != nullptr)
-        {
-            mObjects.emplace_back(this, objectElement);
-            objectElement = objectElement->NextSiblingElement("object");
-        }
-    }
-
-    //  =======================================================================
-    const Object* ObjectGroup::GetObject(const size_t index) const
-    {
-        if (index < mObjects.size())
-        {
-            return &mObjects[index];
-        }
-        else
-        {
-            return nullptr;
-        }
-    }
-
-    //  =======================================================================
-    const std::vector<Object>& ObjectGroup::GetObjects() const
-    {
-        return mObjects;
-    }
-
-    //  =======================================================================
-    int ObjectGroup::GetObjectCount() const
-    {
-        return mObjects.size();
-    }
+}
 }

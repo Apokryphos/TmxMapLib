@@ -7,46 +7,38 @@ using namespace tinyxml2;
 
 namespace TmxMapLib
 {
-    //  =======================================================================
-    Animation::Animation()
-    {
+//  ===========================================================================
+Animation::Animation() {}
+
+//  ===========================================================================
+const Frame& Animation::getFrame(int index) const {
+    return mFrames.at(index);
+}
+
+//  ===========================================================================
+int Animation::getFrameCount() const {
+    return mFrames.size();
+}
+
+//  ===========================================================================
+const std::vector<Frame>& Animation::getFrames() const {
+    return mFrames;
+}
+
+//  ===========================================================================
+void Animation::loadAnimation(const XMLElement* animElement) {
+    if (animElement == nullptr) {
+        throw NullArgumentException("animElement");
     }
 
-    //  =======================================================================
-    const Frame& Animation::GetFrame(int index) const
-    {
-        return mFrames.at(index);
+    int frameCount = countElements(animElement, "frame");
+    mFrames.reserve(frameCount);
+
+    const XMLElement* frameElement = animElement->FirstChildElement("frame");
+    while (frameElement != nullptr) {
+        mFrames.emplace_back(frameElement);
+
+        frameElement = frameElement->NextSiblingElement("frame");
     }
-
-    //  =======================================================================
-    int Animation::GetFrameCount() const
-    {
-        return mFrames.size();
-    }
-
-    //  =======================================================================
-    const std::vector<Frame>& Animation::GetFrames() const
-    {
-        return mFrames;
-    }
-
-    //  =======================================================================
-    void Animation::LoadAnimation(const XMLElement* animElement)
-    {
-        if (animElement == nullptr)
-        {
-            throw NullArgumentException("animElement");
-        }
-
-        int frameCount = CountElements(animElement, "frame");
-        mFrames.reserve(frameCount);
-
-        const XMLElement* frameElement = animElement->FirstChildElement("frame");
-        while (frameElement != nullptr)
-        {
-            mFrames.emplace_back(frameElement);
-
-            frameElement = frameElement->NextSiblingElement("frame");
-        }
-    }
+}
 }

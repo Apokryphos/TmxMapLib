@@ -6,31 +6,31 @@
 
 namespace tinyxml2
 {
-    class XMLElement;
+class XMLElement;
 }
 
 namespace TmxMapLib
 {
-    class ImageLayer : public LayerBase
-    {
-    private:
-        Image mImage;
+class ImageLayer : public LayerBase
+{
+private:
+    Image mImage;
 
-        void LoadImageLayer(const tinyxml2::XMLElement* imageLayerElement);
+    void loadImageLayer(const tinyxml2::XMLElement* imageLayerElement);
 
-    public:
+public:
 
-        /*
-        *   Constructs an ImageLayer from the specified XML element.
-        */
-        ImageLayer(
-            const Map* map,
-            const int tmxOrder,
-            const tinyxml2::XMLElement* layerElement);
+    /*
+    *   Constructs an ImageLayer from the specified XML element.
+    */
+    ImageLayer(
+        const Map* map,
+        const int tmxOrder,
+        const tinyxml2::XMLElement* layerElement);
 
-        /*
-        *   Returns the image for this layer.
-        */
-        const Image& GetImage() const;
-    };
+    /*
+    *   Returns the image for this layer.
+    */
+    const Image& getImage() const;
+};
 }

@@ -7,129 +7,109 @@ using namespace tinyxml2;
 
 namespace TmxMapLib
 {
-    //  =======================================================================
-    Tileset::Tileset(const int firstGid, const XMLElement* tilesetElement)
-        : mFirstGid(firstGid)
-    {
-        LoadTileset(tilesetElement);
+//  ===========================================================================
+Tileset::Tileset(const int firstGid, const XMLElement* tilesetElement)
+    : mFirstGid(firstGid) {
+    this->loadTileset(tilesetElement);
+}
+
+//  ===========================================================================
+int Tileset::getFirstGid() const {
+    return mFirstGid;
+}
+
+//  ===========================================================================
+const Image& Tileset::getImage() const {
+    return mImage;
+}
+
+//  ===========================================================================
+const std::string& Tileset::getName() const {
+    return mName;
+}
+
+//  ===========================================================================
+const PropertySet& Tileset::getPropertySet() const {
+    return mProperties;
+}
+
+//  ===========================================================================
+const TilesetTile* Tileset::getTile(int id) const {
+    auto t = mTiles.find(id);
+
+    return
+        t != mTiles.end() ?
+        &(t->second) :
+        nullptr;
+}
+
+//  ===========================================================================
+const std::unordered_map<int, TilesetTile>& Tileset::getTiles() const {
+    return mTiles;
+}
+
+//  ===========================================================================
+int Tileset::getTileHeight() const {
+    return mTileHeight;
+}
+
+//  ===========================================================================
+int Tileset::getTileCount() const {
+    return mTileCount;
+}
+
+//  ===========================================================================
+int Tileset::getTileWidth() const {
+    return mTileWidth;
+}
+
+//  ===========================================================================
+void Tileset::loadTileset(const XMLElement* tilesetElement) {
+    if (tilesetElement == nullptr) {
+        throw NullArgumentException("Tileset element cannot be null.");
     }
 
-    //  =======================================================================
-    int Tileset::GetFirstGid() const
-    {
-        return mFirstGid;
+    if (tilesetElement->Attribute("name")) {
+        mName = tilesetElement->Attribute("name");
     }
 
-    //  =======================================================================
-    const Image& Tileset::GetImage() const
-    {
-        return mImage;
+    if (tilesetElement->QueryIntAttribute("tilewidth", &mTileWidth) != XML_SUCCESS) {
+        throw XmlAttributeException("tilewidth");
     }
 
-    //  =======================================================================
-    const std::string& Tileset::GetName() const
-    {
-        return mName;
+    if (tilesetElement->QueryIntAttribute("tileheight", &mTileHeight) != XML_SUCCESS) {
+        throw XmlAttributeException("tileheight");
     }
 
-    //  =======================================================================
-    const PropertySet& Tileset::GetPropertySet() const
-    {
-        return mProperties;
+    if (tilesetElement->QueryIntAttribute("tilecount", &mTileCount) != XML_SUCCESS) {
+        throw XmlAttributeException("tilecount");
     }
 
-    //  =======================================================================
-    const TilesetTile* Tileset::GetTile(int id) const
-    {
-        auto t = mTiles.find(id);
-
-        return
-            t != mTiles.end() ?
-            &(t->second) :
-            nullptr;
+    if (tilesetElement->QueryIntAttribute("columns", &mColumns) != XML_SUCCESS) {
+        throw XmlAttributeException("columns");
     }
 
-    //  =======================================================================
-    const std::unordered_map<int, TilesetTile>& Tileset::GetTiles() const
-    {
-        return mTiles;
+    //  Tileset level properties
+    if (tilesetElement->FirstChildElement("properties")) {
+        mProperties.loadProperties(tilesetElement->FirstChildElement("properties"));
     }
 
-    //  =======================================================================
-    int Tileset::GetTileHeight() const
-    {
-        return mTileHeight;
-    }
+    int tileCount = countElements(tilesetElement, "tile");
+    mTiles.reserve(tileCount);
 
-    //  =======================================================================
-    int Tileset::GetTileCount() const
-    {
-        return mTileCount;
-    }
-
-    //  =======================================================================
-    int Tileset::GetTileWidth() const
-    {
-        return mTileWidth;
-    }
-
-    //  =======================================================================
-    void Tileset::LoadTileset(const XMLElement* tilesetElement)
-    {
-        if (tilesetElement == nullptr)
-        {
-            throw NullArgumentException("Tileset element cannot be null.");
+    const XMLElement* tileElement = tilesetElement->FirstChildElement("tile");
+    while (tileElement != nullptr) {
+        int id;
+        if (tileElement->QueryIntAttribute("id", &id) != XML_SUCCESS) {
+            throw XmlAttributeException("id");
         }
 
-        if (tilesetElement->Attribute("name"))
-        {
-            mName = tilesetElement->Attribute("name");
-        }
+        mTiles.emplace(id, tileElement);
 
-        if (tilesetElement->QueryIntAttribute("tilewidth", &mTileWidth) != XML_SUCCESS)
-        {
-            throw XmlAttributeException("tilewidth");
-        }
-
-        if (tilesetElement->QueryIntAttribute("tileheight", &mTileHeight) != XML_SUCCESS)
-        {
-            throw XmlAttributeException("tileheight");
-        }
-
-        if (tilesetElement->QueryIntAttribute("tilecount", &mTileCount) != XML_SUCCESS)
-        {
-            throw XmlAttributeException("tilecount");
-        }
-
-        if (tilesetElement->QueryIntAttribute("columns", &mColumns) != XML_SUCCESS)
-        {
-            throw XmlAttributeException("columns");
-        }
-
-        //  Tileset level properties
-        if (tilesetElement->FirstChildElement("properties"))
-        {
-            mProperties.LoadProperties(tilesetElement->FirstChildElement("properties"));
-        }
-
-        int tileCount = CountElements(tilesetElement, "tile");
-        mTiles.reserve(tileCount);
-
-        const XMLElement* tileElement = tilesetElement->FirstChildElement("tile");
-        while (tileElement != nullptr)
-        {
-            int id;
-            if (tileElement->QueryIntAttribute("id", &id) != XML_SUCCESS)
-            {
-                throw XmlAttributeException("id");
-            }
-
-            mTiles.emplace(id, tileElement);
-
-            tileElement = tileElement->NextSiblingElement("tile");
-        }
-
-        const XMLElement* imageElement = tilesetElement->FirstChildElement("image");
-        mImage.LoadImage(imageElement);
+        tileElement = tileElement->NextSiblingElement("tile");
     }
+
+    const XMLElement* imageElement = tilesetElement->FirstChildElement("image");
+    mImage.loadImage(imageElement);
+}
 }

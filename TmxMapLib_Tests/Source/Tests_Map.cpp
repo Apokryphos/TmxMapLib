@@ -3,235 +3,235 @@
 
 using namespace TmxMapLib;
 
-//  ===========================================================================
+//  ===============================================================================
 TEST_CASE("TmxMap TMX filename constructor", "[map]")
 {
     Map map("map01.tmx");
 
-    REQUIRE(map.GetWidth() == 20);
-    REQUIRE(map.GetHeight() == 16);
-    REQUIRE(map.GetTileWidth() == 16);
-    REQUIRE(map.GetTileHeight() == 16);
+    REQUIRE(map.getWidth() == 20);
+    REQUIRE(map.getHeight() == 16);
+    REQUIRE(map.getTileWidth() == 16);
+    REQUIRE(map.getTileHeight() == 16);
 
     //  Map properties
-    REQUIRE(map.GetPropertySet().GetProperty("AllowSave")->GetName() == "AllowSave");
-    REQUIRE(map.GetPropertySet().GetProperty("AllowSave")->GetType() == PropertyType::Bool);
-    REQUIRE(map.GetPropertySet().GetProperty("AllowSave")->GetValue() == "true");
-    REQUIRE(map.GetPropertySet().GetProperty("AllowSave")->GetBoolValue() == true);
-    REQUIRE(map.GetPropertySet().GetBoolValue("AllowSave", false) == true);
+    REQUIRE(map.getPropertySet().getProperty("AllowSave")->getName() == "AllowSave");
+    REQUIRE(map.getPropertySet().getProperty("AllowSave")->getType() == PropertyType::Bool);
+    REQUIRE(map.getPropertySet().getProperty("AllowSave")->getValue() == "true");
+    REQUIRE(map.getPropertySet().getProperty("AllowSave")->getBoolValue() == true);
+    REQUIRE(map.getPropertySet().getBoolValue("AllowSave", false) == true);
 
-    REQUIRE(map.GetPropertySet().GetProperty("Difficulty")->GetName() == "Difficulty");
-    REQUIRE(map.GetPropertySet().GetProperty("Difficulty")->GetType() == PropertyType::Int);
-    REQUIRE(map.GetPropertySet().GetProperty("Difficulty")->GetValue() == "2");
-    REQUIRE(map.GetPropertySet().GetProperty("Difficulty")->GetIntValue() == 2);
-    REQUIRE(map.GetPropertySet().GetProperty("Difficulty")->GetDoubleValue() == 2);
-    REQUIRE(map.GetPropertySet().GetProperty("Difficulty")->GetFloatValue() == 2.0f);
-    REQUIRE(map.GetPropertySet().GetIntValue("Difficulty", 0) == 2);
-    REQUIRE(map.GetPropertySet().GetDoubleValue("Difficulty", 0) == 2.0);
-    REQUIRE(map.GetPropertySet().GetFloatValue("Difficulty", 0.0f) == 2.0f);
+    REQUIRE(map.getPropertySet().getProperty("Difficulty")->getName() == "Difficulty");
+    REQUIRE(map.getPropertySet().getProperty("Difficulty")->getType() == PropertyType::Int);
+    REQUIRE(map.getPropertySet().getProperty("Difficulty")->getValue() == "2");
+    REQUIRE(map.getPropertySet().getProperty("Difficulty")->getIntValue() == 2);
+    REQUIRE(map.getPropertySet().getProperty("Difficulty")->getDoubleValue() == 2);
+    REQUIRE(map.getPropertySet().getProperty("Difficulty")->getFloatValue() == 2.0f);
+    REQUIRE(map.getPropertySet().getIntValue("Difficulty", 0) == 2);
+    REQUIRE(map.getPropertySet().getDoubleValue("Difficulty", 0) == 2.0);
+    REQUIRE(map.getPropertySet().getFloatValue("Difficulty", 0.0f) == 2.0f);
 
-    REQUIRE(map.GetPropertySet().GetProperty("LootChance")->GetName() == "LootChance");
-    REQUIRE(map.GetPropertySet().GetProperty("LootChance")->GetType() == PropertyType::Float);
-    REQUIRE(map.GetPropertySet().GetProperty("LootChance")->GetValue() == "0.5");
-    REQUIRE(map.GetPropertySet().GetProperty("LootChance")->GetDoubleValue() == 0.5);
-    REQUIRE(map.GetPropertySet().GetProperty("LootChance")->GetFloatValue() == 0.5f);
-    REQUIRE(map.GetPropertySet().GetDoubleValue("LootChance", 0) == 0.5);
-    REQUIRE(map.GetPropertySet().GetFloatValue("LootChance", 0.0f) == 0.5f);
+    REQUIRE(map.getPropertySet().getProperty("LootChance")->getName() == "LootChance");
+    REQUIRE(map.getPropertySet().getProperty("LootChance")->getType() == PropertyType::Float);
+    REQUIRE(map.getPropertySet().getProperty("LootChance")->getValue() == "0.5");
+    REQUIRE(map.getPropertySet().getProperty("LootChance")->getDoubleValue() == 0.5);
+    REQUIRE(map.getPropertySet().getProperty("LootChance")->getFloatValue() == 0.5f);
+    REQUIRE(map.getPropertySet().getDoubleValue("LootChance", 0) == 0.5);
+    REQUIRE(map.getPropertySet().getFloatValue("LootChance", 0.0f) == 0.5f);
 
-    REQUIRE(map.GetPropertySet().GetProperty("Name")->GetName() == "Name");
-    REQUIRE(map.GetPropertySet().GetProperty("Name")->GetValue() == "Test Map");
-    REQUIRE(map.GetPropertySet().GetProperty("Name")->GetType() == PropertyType::String);
+    REQUIRE(map.getPropertySet().getProperty("Name")->getName() == "Name");
+    REQUIRE(map.getPropertySet().getProperty("Name")->getValue() == "Test Map");
+    REQUIRE(map.getPropertySet().getProperty("Name")->getType() == PropertyType::String);
 
     //  Layer opacity and visibility
-    REQUIRE(map.GetTileLayer(0).GetOpacity() == 1);
-    REQUIRE(map.GetTileLayer(0).GetVisible() == true);
-    REQUIRE(map.GetTileLayer(1).GetOpacity() == 1);
-    REQUIRE(map.GetTileLayer(1).GetVisible() == true);
-    REQUIRE(map.GetObjectGroup(0).GetOpacity() == 1);
-    REQUIRE(map.GetObjectGroup(0).GetVisible() == true);
-    REQUIRE(map.GetImageLayer(0).GetOpacity() == 0.5);
-    REQUIRE(map.GetImageLayer(0).GetVisible() == false);
+    REQUIRE(map.getTileLayer(0).getOpacity() == 1);
+    REQUIRE(map.getTileLayer(0).getVisible() == true);
+    REQUIRE(map.getTileLayer(1).getOpacity() == 1);
+    REQUIRE(map.getTileLayer(1).getVisible() == true);
+    REQUIRE(map.getObjectGroup(0).getOpacity() == 1);
+    REQUIRE(map.getObjectGroup(0).getVisible() == true);
+    REQUIRE(map.getImageLayer(0).getOpacity() == 0.5);
+    REQUIRE(map.getImageLayer(0).getVisible() == false);
 
     //  Tilesets
-    REQUIRE(map.GetTilesetCount() == 2);
+    REQUIRE(map.getTilesetCount() == 2);
 
     //  GIDs start at 1. GID 0 is an empty tile.
-    REQUIRE(map.GetTilesetByGid(0) == nullptr);
-    REQUIRE(map.GetTilesetByGid(1) == &map.GetTileset(0));
-    REQUIRE(map.GetTilesetByGid(280) == &map.GetTileset(0));
-    REQUIRE(map.GetTilesetByGid(281) == &map.GetTileset(1));
-    REQUIRE(map.GetTilesetByGid(560) == &map.GetTileset(1));
-    REQUIRE(map.GetTilesetByGid(561) == nullptr);
+    REQUIRE(map.getTilesetByGid(0) == nullptr);
+    REQUIRE(map.getTilesetByGid(1) == &map.getTileset(0));
+    REQUIRE(map.getTilesetByGid(280) == &map.getTileset(0));
+    REQUIRE(map.getTilesetByGid(281) == &map.getTileset(1));
+    REQUIRE(map.getTilesetByGid(560) == &map.getTileset(1));
+    REQUIRE(map.getTilesetByGid(561) == nullptr);
 
     //  Embedded tileset
-    REQUIRE(map.GetTileset(0).GetName() == "embedded_tileset");
-    REQUIRE(map.GetTileset(0).GetTileWidth() == 16);
-    REQUIRE(map.GetTileset(0).GetTileHeight() == 16);
-    REQUIRE(map.GetTileset(0).GetTileCount() == 280);
-    REQUIRE(map.GetTileset(0).GetImage().GetWidth() == 160);
-    REQUIRE(map.GetTileset(0).GetImage().GetHeight() == 448);
-    REQUIRE(map.GetTileset(0).GetImage().GetSource() == "tileset.png");
+    REQUIRE(map.getTileset(0).getName() == "embedded_tileset");
+    REQUIRE(map.getTileset(0).getTileWidth() == 16);
+    REQUIRE(map.getTileset(0).getTileHeight() == 16);
+    REQUIRE(map.getTileset(0).getTileCount() == 280);
+    REQUIRE(map.getTileset(0).getImage().getWidth() == 160);
+    REQUIRE(map.getTileset(0).getImage().getHeight() == 448);
+    REQUIRE(map.getTileset(0).getImage().getSource() == "tileset.png");
 
-    REQUIRE(map.GetTileset(0).GetPropertySet().GetProperty("Comment")->GetName() == "Comment");
-    REQUIRE(map.GetTileset(0).GetPropertySet().GetProperty("Comment")->GetValue() == "Imbedded tileset.");
-    REQUIRE(map.GetTileset(0).GetPropertySet().GetProperty("Comment")->GetType() == PropertyType::String);
+    REQUIRE(map.getTileset(0).getPropertySet().getProperty("Comment")->getName() == "Comment");
+    REQUIRE(map.getTileset(0).getPropertySet().getProperty("Comment")->getValue() == "Imbedded tileset.");
+    REQUIRE(map.getTileset(0).getPropertySet().getProperty("Comment")->getType() == PropertyType::String);
 
-    REQUIRE(map.GetTileset(0).GetTile(0)->GetId() == 0);
-    REQUIRE(map.GetTileset(0).GetTile(0)->GetPropertySet().GetProperty("Collision")->GetBoolValue() == true);
+    REQUIRE(map.getTileset(0).getTile(0)->getId() == 0);
+    REQUIRE(map.getTileset(0).getTile(0)->getPropertySet().getProperty("Collision")->getBoolValue() == true);
 
-    REQUIRE(map.GetTileset(0).GetTile(57)->GetId() == 57);
-    REQUIRE(map.GetTileset(0).GetTile(57)->GetPropertySet().GetProperty("Collision")->GetBoolValue() == true);
+    REQUIRE(map.getTileset(0).getTile(57)->getId() == 57);
+    REQUIRE(map.getTileset(0).getTile(57)->getPropertySet().getProperty("Collision")->getBoolValue() == true);
 
     //  External tileset TSX
-    REQUIRE(map.GetTileset(1).GetName() == "external_tileset");
-    REQUIRE(map.GetTileset(1).GetTileWidth() == 16);
-    REQUIRE(map.GetTileset(1).GetTileHeight() == 16);
-    REQUIRE(map.GetTileset(1).GetTileCount() == 280);
-    REQUIRE(map.GetTileset(1).GetImage().GetWidth() == 160);
-    REQUIRE(map.GetTileset(1).GetImage().GetHeight() == 448);
-    REQUIRE(map.GetTileset(1).GetImage().GetSource() == "tileset.png");
+    REQUIRE(map.getTileset(1).getName() == "external_tileset");
+    REQUIRE(map.getTileset(1).getTileWidth() == 16);
+    REQUIRE(map.getTileset(1).getTileHeight() == 16);
+    REQUIRE(map.getTileset(1).getTileCount() == 280);
+    REQUIRE(map.getTileset(1).getImage().getWidth() == 160);
+    REQUIRE(map.getTileset(1).getImage().getHeight() == 448);
+    REQUIRE(map.getTileset(1).getImage().getSource() == "tileset.png");
 
-    REQUIRE(map.GetTileLayerCount() == 2);
+    REQUIRE(map.getTileLayerCount() == 2);
 
     //  Tile layer tiles
-    REQUIRE(map.GetTileLayer(0).GetTile(128)->GetGid() == 58);
-    REQUIRE(map.GetTileLayer(0).GetTile(8, 6)->GetGid() == 58);
+    REQUIRE(map.getTileLayer(0).getTile(128)->getGid() == 58);
+    REQUIRE(map.getTileLayer(0).getTile(8, 6)->getGid() == 58);
 
     //  Tile layer properties
-    REQUIRE(map.GetTileLayer(0).GetPropertySet().GetProperty("Tile Layer Property")->GetName() == "Tile Layer Property");
-    REQUIRE(map.GetTileLayer(0).GetPropertySet().GetProperty("Tile Layer Property")->GetValue() == "99");
-    REQUIRE(map.GetTileLayer(0).GetPropertySet().GetProperty("Tile Layer Property")->GetType() == PropertyType::Int);
-    REQUIRE(map.GetTileLayer(0).GetPropertySet().GetProperty("Tile Layer Property")->GetIntValue() == 99);
-    REQUIRE(map.GetTileLayer(0).GetPropertySet().GetProperty("Tile Layer Property")->GetDoubleValue() == 99);
-    REQUIRE(map.GetTileLayer(0).GetPropertySet().GetProperty("Tile Layer Property")->GetFloatValue() == 99.0f);
+    REQUIRE(map.getTileLayer(0).getPropertySet().getProperty("Tile Layer Property")->getName() == "Tile Layer Property");
+    REQUIRE(map.getTileLayer(0).getPropertySet().getProperty("Tile Layer Property")->getValue() == "99");
+    REQUIRE(map.getTileLayer(0).getPropertySet().getProperty("Tile Layer Property")->getType() == PropertyType::Int);
+    REQUIRE(map.getTileLayer(0).getPropertySet().getProperty("Tile Layer Property")->getIntValue() == 99);
+    REQUIRE(map.getTileLayer(0).getPropertySet().getProperty("Tile Layer Property")->getDoubleValue() == 99);
+    REQUIRE(map.getTileLayer(0).getPropertySet().getProperty("Tile Layer Property")->getFloatValue() == 99.0f);
 
     //  Flip and rotate tiles
-    REQUIRE(map.GetTileLayer(1).GetTile(1, 12)->GetGid() == 257);
-    REQUIRE(map.GetTileLayer(1).GetTile(2, 12)->GetGid() == 257);
-    REQUIRE(map.GetTileLayer(1).GetTile(3, 12)->GetGid() == 257);
-    REQUIRE(map.GetTileLayer(1).GetTile(4, 12)->GetGid() == 257);
+    REQUIRE(map.getTileLayer(1).getTile(1, 12)->getGid() == 257);
+    REQUIRE(map.getTileLayer(1).getTile(2, 12)->getGid() == 257);
+    REQUIRE(map.getTileLayer(1).getTile(3, 12)->getGid() == 257);
+    REQUIRE(map.getTileLayer(1).getTile(4, 12)->getGid() == 257);
 
-    REQUIRE(map.GetTileLayer(1).GetTile(1, 12)->GetRawGid() == 257);
-    REQUIRE(map.GetTileLayer(1).GetTile(2, 12)->GetRawGid() == 2684354817);
-    REQUIRE(map.GetTileLayer(1).GetTile(3, 12)->GetRawGid() == 3221225729);
-    REQUIRE(map.GetTileLayer(1).GetTile(4, 12)->GetRawGid() == 1610612993);
+    REQUIRE(map.getTileLayer(1).getTile(1, 12)->getRawGid() == 257);
+    REQUIRE(map.getTileLayer(1).getTile(2, 12)->getRawGid() == 2684354817);
+    REQUIRE(map.getTileLayer(1).getTile(3, 12)->getRawGid() == 3221225729);
+    REQUIRE(map.getTileLayer(1).getTile(4, 12)->getRawGid() == 1610612993);
 
-    REQUIRE(map.GetTileLayer(1).GetTile(1, 12)->GetFlipHorizontally() == false);
-    REQUIRE(map.GetTileLayer(1).GetTile(1, 12)->GetFlipVertically() == false);
-    REQUIRE(map.GetTileLayer(1).GetTile(1, 12)->GetFlipDiagonally() == false);
+    REQUIRE(map.getTileLayer(1).getTile(1, 12)->getFlipHorizontally() == false);
+    REQUIRE(map.getTileLayer(1).getTile(1, 12)->getFlipVertically() == false);
+    REQUIRE(map.getTileLayer(1).getTile(1, 12)->getFlipDiagonally() == false);
 
-    REQUIRE(map.GetTileLayer(1).GetTile(2, 12)->GetFlipHorizontally() == true);
-    REQUIRE(map.GetTileLayer(1).GetTile(2, 12)->GetFlipVertically() == false);
-    REQUIRE(map.GetTileLayer(1).GetTile(2, 12)->GetFlipDiagonally() == true);
+    REQUIRE(map.getTileLayer(1).getTile(2, 12)->getFlipHorizontally() == true);
+    REQUIRE(map.getTileLayer(1).getTile(2, 12)->getFlipVertically() == false);
+    REQUIRE(map.getTileLayer(1).getTile(2, 12)->getFlipDiagonally() == true);
 
-    REQUIRE(map.GetTileLayer(1).GetTile(3, 12)->GetFlipHorizontally() == true);
-    REQUIRE(map.GetTileLayer(1).GetTile(3, 12)->GetFlipVertically() == true);
-    REQUIRE(map.GetTileLayer(1).GetTile(3, 12)->GetFlipDiagonally() == false);
+    REQUIRE(map.getTileLayer(1).getTile(3, 12)->getFlipHorizontally() == true);
+    REQUIRE(map.getTileLayer(1).getTile(3, 12)->getFlipVertically() == true);
+    REQUIRE(map.getTileLayer(1).getTile(3, 12)->getFlipDiagonally() == false);
 
-    REQUIRE(map.GetTileLayer(1).GetTile(4, 12)->GetFlipHorizontally() == false);
-    REQUIRE(map.GetTileLayer(1).GetTile(4, 12)->GetFlipVertically() == true);
-    REQUIRE(map.GetTileLayer(1).GetTile(4, 12)->GetFlipDiagonally() == true);
+    REQUIRE(map.getTileLayer(1).getTile(4, 12)->getFlipHorizontally() == false);
+    REQUIRE(map.getTileLayer(1).getTile(4, 12)->getFlipVertically() == true);
+    REQUIRE(map.getTileLayer(1).getTile(4, 12)->getFlipDiagonally() == true);
 
     //  Object groups
-    REQUIRE(map.GetObjectGroupCount() == 1);
+    REQUIRE(map.getObjectGroupCount() == 1);
 
     //  Object group properties
-    REQUIRE(map.GetObjectGroup(0).GetPropertySet().GetProperty("Object Layer Property")->GetName() == "Object Layer Property");
-    REQUIRE(map.GetObjectGroup(0).GetPropertySet().GetProperty("Object Layer Property")->GetValue() == "true");
-    REQUIRE(map.GetObjectGroup(0).GetPropertySet().GetProperty("Object Layer Property")->GetType() == PropertyType::Bool);
-    REQUIRE(map.GetObjectGroup(0).GetPropertySet().GetProperty("Object Layer Property")->GetBoolValue() == true);
+    REQUIRE(map.getObjectGroup(0).getPropertySet().getProperty("Object Layer Property")->getName() == "Object Layer Property");
+    REQUIRE(map.getObjectGroup(0).getPropertySet().getProperty("Object Layer Property")->getValue() == "true");
+    REQUIRE(map.getObjectGroup(0).getPropertySet().getProperty("Object Layer Property")->getType() == PropertyType::Bool);
+    REQUIRE(map.getObjectGroup(0).getPropertySet().getProperty("Object Layer Property")->getBoolValue() == true);
 
     //  Tile object
-    REQUIRE(map.GetObjectGroup(0).GetObject(0)->GetId() == 1);
-    REQUIRE(map.GetObjectGroup(0).GetObject(0)->GetName() == "Slime");
-    REQUIRE(map.GetObjectGroup(0).GetObject(0)->GetType() == "Monster");
-    REQUIRE(map.GetObjectGroup(0).GetObject(0)->GetObjectType() == ObjectType::Tile);
-    REQUIRE(map.GetObjectGroup(0).GetObject(0)->GetTile() != nullptr);
-    REQUIRE(map.GetObjectGroup(0).GetObject(0)->GetTile()->GetGid() == 221);
-    REQUIRE(map.GetObjectGroup(0).GetObject(0)->GetX() == 72.5);
-    REQUIRE(map.GetObjectGroup(0).GetObject(0)->GetY() == 55.5);
-    REQUIRE(map.GetObjectGroup(0).GetObject(0)->GetWidth() == 16);
-    REQUIRE(map.GetObjectGroup(0).GetObject(0)->GetHeight() == 16);
-    REQUIRE(map.GetObjectGroup(0).GetObject(0)->GetPropertySet().GetProperty("Speed") != nullptr);
+    REQUIRE(map.getObjectGroup(0).getObject(0)->getId() == 1);
+    REQUIRE(map.getObjectGroup(0).getObject(0)->getName() == "Slime");
+    REQUIRE(map.getObjectGroup(0).getObject(0)->getType() == "Monster");
+    REQUIRE(map.getObjectGroup(0).getObject(0)->getObjectType() == ObjectType::Tile);
+    REQUIRE(map.getObjectGroup(0).getObject(0)->getTile() != nullptr);
+    REQUIRE(map.getObjectGroup(0).getObject(0)->getTile()->getGid() == 221);
+    REQUIRE(map.getObjectGroup(0).getObject(0)->getX() == 72.5);
+    REQUIRE(map.getObjectGroup(0).getObject(0)->getY() == 55.5);
+    REQUIRE(map.getObjectGroup(0).getObject(0)->getWidth() == 16);
+    REQUIRE(map.getObjectGroup(0).getObject(0)->getHeight() == 16);
+    REQUIRE(map.getObjectGroup(0).getObject(0)->getPropertySet().getProperty("Speed") != nullptr);
 
     //  Polyline object
-    REQUIRE(map.GetObjectGroup(0).GetObject(2)->GetId() == 6);
-    REQUIRE(map.GetObjectGroup(0).GetObject(2)->GetName() == "SlimePath");
-    REQUIRE(map.GetObjectGroup(0).GetObject(2)->GetType() == "Path");
-    REQUIRE(map.GetObjectGroup(0).GetObject(2)->GetObjectType() == ObjectType::Polyline);
-    REQUIRE(map.GetObjectGroup(0).GetObject(2)->GetTile() == nullptr);
-    REQUIRE(map.GetObjectGroup(0).GetObject(2)->GetX() == 80.5);
-    REQUIRE(map.GetObjectGroup(0).GetObject(2)->GetY() == 51);
-    REQUIRE(map.GetObjectGroup(0).GetObject(2)->GetPointCount() == 8);
-    REQUIRE(map.GetObjectGroup(0).GetObject(2)->GetPoints()[0].X == 0);
-    REQUIRE(map.GetObjectGroup(0).GetObject(2)->GetPoints()[0].Y == 0);
-    REQUIRE(map.GetObjectGroup(0).GetObject(2)->GetPoints()[1].X == 12);
-    REQUIRE(map.GetObjectGroup(0).GetObject(2)->GetPoints()[1].Y == 64.5);
-    REQUIRE(map.GetObjectGroup(0).GetObject(2)->GetPoints()[2].X == 39);
-    REQUIRE(map.GetObjectGroup(0).GetObject(2)->GetPoints()[2].Y == 83.5);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getId() == 6);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getName() == "SlimePath");
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getType() == "Path");
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getObjectType() == ObjectType::Polyline);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getTile() == nullptr);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getX() == 80.5);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getY() == 51);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getPointCount() == 8);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[0].X == 0);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[0].Y == 0);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[1].X == 12);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[1].Y == 64.5);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[2].X == 39);
+    REQUIRE(map.getObjectGroup(0).getObject(2)->getPoints()[2].Y == 83.5);
 
     //  Polygon object
-    REQUIRE(map.GetObjectGroup(0).GetObject(3)->GetId() == 7);
-    REQUIRE(map.GetObjectGroup(0).GetObject(3)->GetName() == "Dig Area");
-    REQUIRE(map.GetObjectGroup(0).GetObject(3)->GetType() == "");
-    REQUIRE(map.GetObjectGroup(0).GetObject(3)->GetObjectType() == ObjectType::Polygon);
-    REQUIRE(map.GetObjectGroup(0).GetObject(3)->GetTile() == nullptr);
-    REQUIRE(map.GetObjectGroup(0).GetObject(3)->GetX() == 225.5);
-    REQUIRE(map.GetObjectGroup(0).GetObject(3)->GetY() == 169.5);
-    REQUIRE(map.GetObjectGroup(0).GetObject(3)->GetPointCount() == 4);
-    REQUIRE(map.GetObjectGroup(0).GetObject(3)->GetPoints()[0].X == 0);
-    REQUIRE(map.GetObjectGroup(0).GetObject(3)->GetPoints()[0].Y == 0);
-    REQUIRE(map.GetObjectGroup(0).GetObject(3)->GetPoints()[1].X == -38);
-    REQUIRE(map.GetObjectGroup(0).GetObject(3)->GetPoints()[1].Y == 57.5);
+    REQUIRE(map.getObjectGroup(0).getObject(3)->getId() == 7);
+    REQUIRE(map.getObjectGroup(0).getObject(3)->getName() == "Dig Area");
+    REQUIRE(map.getObjectGroup(0).getObject(3)->getType() == "");
+    REQUIRE(map.getObjectGroup(0).getObject(3)->getObjectType() == ObjectType::Polygon);
+    REQUIRE(map.getObjectGroup(0).getObject(3)->getTile() == nullptr);
+    REQUIRE(map.getObjectGroup(0).getObject(3)->getX() == 225.5);
+    REQUIRE(map.getObjectGroup(0).getObject(3)->getY() == 169.5);
+    REQUIRE(map.getObjectGroup(0).getObject(3)->getPointCount() == 4);
+    REQUIRE(map.getObjectGroup(0).getObject(3)->getPoints()[0].X == 0);
+    REQUIRE(map.getObjectGroup(0).getObject(3)->getPoints()[0].Y == 0);
+    REQUIRE(map.getObjectGroup(0).getObject(3)->getPoints()[1].X == -38);
+    REQUIRE(map.getObjectGroup(0).getObject(3)->getPoints()[1].Y == 57.5);
 
     //  Image layers
-    REQUIRE(map.GetImageLayerCount() == 1);
+    REQUIRE(map.getImageLayerCount() == 1);
 
-    REQUIRE(map.GetImageLayer(0).GetImage().GetWidth() == 160);
-    REQUIRE(map.GetImageLayer(0).GetImage().GetHeight() == 448);
-    REQUIRE(map.GetImageLayer(0).GetImage().GetSource() == "tileset.png");
+    REQUIRE(map.getImageLayer(0).getImage().getWidth() == 160);
+    REQUIRE(map.getImageLayer(0).getImage().getHeight() == 448);
+    REQUIRE(map.getImageLayer(0).getImage().getSource() == "tileset.png");
 
     //  TMX order
-    REQUIRE(map.GetTileLayer(0).GetTmxOrder() == 0);
-    REQUIRE(map.GetTileLayer(1).GetTmxOrder() == 1);
-    REQUIRE(map.GetObjectGroup(0).GetTmxOrder() == 2);
-    REQUIRE(map.GetImageLayer(0).GetTmxOrder() == 3);
+    REQUIRE(map.getTileLayer(0).getTmxOrder() == 0);
+    REQUIRE(map.getTileLayer(1).getTmxOrder() == 1);
+    REQUIRE(map.getObjectGroup(0).getTmxOrder() == 2);
+    REQUIRE(map.getImageLayer(0).getTmxOrder() == 3);
 
-    REQUIRE(map.GetLayersInTmxOrder()[0]->GetTmxOrder() == 0);
-    REQUIRE(map.GetLayersInTmxOrder()[1]->GetTmxOrder() == 1);
-    REQUIRE(map.GetLayersInTmxOrder()[2]->GetTmxOrder() == 2);
-    REQUIRE(map.GetLayersInTmxOrder()[3]->GetTmxOrder() == 3);
+    REQUIRE(map.getLayersInTmxOrder()[0]->getTmxOrder() == 0);
+    REQUIRE(map.getLayersInTmxOrder()[1]->getTmxOrder() == 1);
+    REQUIRE(map.getLayersInTmxOrder()[2]->getTmxOrder() == 2);
+    REQUIRE(map.getLayersInTmxOrder()[3]->getTmxOrder() == 3);
 
-    REQUIRE(map.GetLayersInTmxOrder()[0] == &map.GetTileLayer(0));
-    REQUIRE(map.GetLayersInTmxOrder()[1] == &map.GetTileLayer(1));
-    REQUIRE(map.GetLayersInTmxOrder()[2] == &map.GetObjectGroup(0));
-    REQUIRE(map.GetLayersInTmxOrder()[3] == &map.GetImageLayer(0));
+    REQUIRE(map.getLayersInTmxOrder()[0] == &map.getTileLayer(0));
+    REQUIRE(map.getLayersInTmxOrder()[1] == &map.getTileLayer(1));
+    REQUIRE(map.getLayersInTmxOrder()[2] == &map.getObjectGroup(0));
+    REQUIRE(map.getLayersInTmxOrder()[3] == &map.getImageLayer(0));
 
-    REQUIRE(map.GetLayersInTmxOrder()[0]->GetLayerType() == LayerType::Tile);
-    REQUIRE(map.GetLayersInTmxOrder()[1]->GetLayerType() == LayerType::Tile);
-    REQUIRE(map.GetLayersInTmxOrder()[2]->GetLayerType() == LayerType::Object);
-    REQUIRE(map.GetLayersInTmxOrder()[3]->GetLayerType() == LayerType::Image);
+    REQUIRE(map.getLayersInTmxOrder()[0]->getLayerType() == LayerType::Tile);
+    REQUIRE(map.getLayersInTmxOrder()[1]->getLayerType() == LayerType::Tile);
+    REQUIRE(map.getLayersInTmxOrder()[2]->getLayerType() == LayerType::Object);
+    REQUIRE(map.getLayersInTmxOrder()[3]->getLayerType() == LayerType::Image);
 
     //  Tile animations
-    const Animation& animation = map.GetTileset(0).GetTile(250)->GetAnimation();
-    REQUIRE(animation.GetFrameCount() == 9);
-    REQUIRE(animation.GetFrame(0).GetDuration() == 100);
-    REQUIRE(animation.GetFrame(0).GetTileId() == 250);
-    REQUIRE(animation.GetFrame(1).GetDuration() == 100);
-    REQUIRE(animation.GetFrame(1).GetTileId() == 251);
+    const Animation& animation = map.getTileset(0).getTile(250)->getAnimation();
+    REQUIRE(animation.getFrameCount() == 9);
+    REQUIRE(animation.getFrame(0).getDuration() == 100);
+    REQUIRE(animation.getFrame(0).getTileId() == 250);
+    REQUIRE(animation.getFrame(1).getDuration() == 100);
+    REQUIRE(animation.getFrame(1).getTileId() == 251);
 
     //  Tile collision object group
-    const TilesetTile* collisionTile = map.GetTileset(0).GetTile(216);
-    REQUIRE(collisionTile->GetObjectGroup().GetObjectCount() == 1);
+    const TilesetTile* collisionTile = map.getTileset(0).getTile(216);
+    REQUIRE(collisionTile->getObjectGroup().getObjectCount() == 1);
 
     //  Tile collision shapes
-    const Object* collisionShape = collisionTile->GetObjectGroup().GetObject(0);
+    const Object* collisionShape = collisionTile->getObjectGroup().getObject(0);
     REQUIRE(collisionShape != nullptr);
 
     //  Iterate over properties
-    for (const auto property : map.GetPropertySet().GetProperties())
+    for (const auto property : map.getPropertySet().getProperties())
     {
-        const std::string propertyName = property->GetName();
+        const std::string propertyName = property->getName();
 
         bool match =
             propertyName =="AllowSave" ||
@@ -244,9 +244,9 @@ TEST_CASE("TmxMap TMX filename constructor", "[map]")
 
 
     //  Iterate over tilesets
-    for (const auto& tileset : map.GetTilesets())
+    for (const auto& tileset : map.getTilesets())
     {
-        const std::string tilesetName = tileset.GetName();
+        const std::string tilesetName = tileset.getName();
 
         bool match =
             tilesetName =="embedded_tileset" ||
@@ -255,7 +255,7 @@ TEST_CASE("TmxMap TMX filename constructor", "[map]")
         REQUIRE(match == true);
 
         int tileCount = 0;
-        for (const auto& tile : tileset.GetTiles())
+        for (const auto& tile : tileset.getTiles())
         {
             ++tileCount;
         }

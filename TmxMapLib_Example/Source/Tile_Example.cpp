@@ -3,51 +3,48 @@
 
 using namespace TmxMapLib;
 
-//  ===========================================================================
+//  ===============================================================================
 int main()
 {
     Map map("map01.tmx");
 
-    std::cout << "Map Width: "     << map.GetWidth()            << std::endl;
-    std::cout << "Map Height: "    << map.GetHeight()           << std::endl;
-    std::cout << "Tile Layers: "   << map.GetTileLayerCount()   << std::endl;
-    std::cout << "Object Groups: " << map.GetObjectGroupCount() << std::endl;
+    std::cout << "Map Width: "     << map.getWidth()            << std::endl;
+    std::cout << "Map Height: "    << map.getHeight()           << std::endl;
+    std::cout << "Tile Layers: "   << map.getTileLayerCount()   << std::endl;
+    std::cout << "Object Groups: " << map.getObjectGroupCount() << std::endl;
 
     //  Iterate over tilesets.
-    for (const Tileset& tileset : map.GetTilesets())
-    {
-        std::cout << "Tileset: " << tileset.GetName() << std::endl;
+    const auto& tilesets = map.getTilesets();
+    for (const Tileset& tileset : tilesets) {
+        std::cout << "Tileset: " << tileset.getName() << std::endl;
     }
 
     //  Iterate over tile layers.
-    for (const TileLayer& tileLayer : map.GetTileLayers())
-    {
-    //  Iterate over tiles.
+    const auto& tileLayers = map.getTileLayers();
+    for (const TileLayer& tileLayer : tileLayers) {
+        //  Iterate over tiles.
         //  You could also use for loops along with the GetTile() method.
-        for (const Tile& tile : tileLayer.GetTiles())
-        {
+        const auto& tiles = tileLayer.getTiles();
+        for (const Tile& tile : tiles) {
             //  Get the tileset this tile belongs to
-            const Tileset* tileset = map.GetTilesetByGid(tile.GetGid());
+            const Tileset* tileset = map.getTilesetByGid(tile.getGid());
 
-            if (tileset != nullptr)
-            {
+            if (tileset != nullptr) {
                 //  Get the tileset tile for this tile.
                 //  This could be null if Tiled didn't export an entry for
                 //  that tile (e.g. if you didn't add any properties)
                 const TilesetTile* tilesetTile =
-                    tileset->GetTile(tile.GetGid() - tileset->GetFirstGid());
+                    tileset->getTile(tile.getGid() - tileset->getFirstGid());
 
-                if (tilesetTile != nullptr)
-                {
+                if (tilesetTile != nullptr) {
                     std::cout << "Tileset Tile ID: "
-                              << tilesetTile->GetId() << std::endl;
+                              << tilesetTile->getId() << std::endl;
 
-                    const PropertySet& propertySet = tilesetTile->GetPropertySet();
+                    const PropertySet& propertySet = tilesetTile->getPropertySet();
 
-                    for (const Property* property : propertySet.GetProperties())
-                    {
-                        std::cout << property->GetName() << ":"
-                                  << property->GetValue() << std::endl;
+                    for (const Property* property : propertySet.getProperties()) {
+                        std::cout << property->getName() << ":"
+                                  << property->getValue() << std::endl;
                     }
                 }
             }

@@ -6,46 +6,46 @@
 
 namespace tinyxml2
 {
-    class XMLElement;
+class XMLElement;
 }
 
 namespace TmxMapLib
 {
-    class TilesetTile
-    {
-    private:
-        int mId;
-        PropertySet mProperties;
-        Animation mAnimation;
-        ObjectGroup mObjectGroup;
+class TilesetTile
+{
+private:
+    int mId;
+    PropertySet mProperties;
+    Animation mAnimation;
+    ObjectGroup mObjectGroup;
 
-        void LoadTilesetTile(const tinyxml2::XMLElement* tilesetTileElement);
+    void loadTilesetTile(const tinyxml2::XMLElement* tilesetTileElement);
 
-    public:
+public:
 
-        /*
-        *   Constructs a TilesetTile from the specified XML element.
-        */
-        TilesetTile(const tinyxml2::XMLElement* tilesetTileElement);
+    /*
+    *   Constructs a TilesetTile from the specified XML element.
+    */
+    TilesetTile(const tinyxml2::XMLElement* tilesetTileElement);
 
-        /*
-        *   Returns the animation for this tile.
-        */
-        const Animation& GetAnimation() const;
+    /*
+    *   Returns the animation for this tile.
+    */
+    const Animation& getAnimation() const;
 
-        /*
-        *   Returns the tileset ID of this tile.
-        */
-        int GetId() const;
+    /*
+    *   Returns the tileset ID of this tile.
+    */
+    int getId() const;
 
-        /*
-        *   Returns the object group for this tile.
-        */
-        const ObjectGroup& GetObjectGroup() const;
+    /*
+    *   Returns the object group for this tile.
+    */
+    const ObjectGroup& getObjectGroup() const;
 
-        /*
-        *   Returns the set of properties for this tileset.
-        */
-        const PropertySet& GetPropertySet() const;
-    };
+    /*
+    *   Returns the set of properties for this tileset.
+    */
+    const PropertySet& getPropertySet() const;
+};
 }

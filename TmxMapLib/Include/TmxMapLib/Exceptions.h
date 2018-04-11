@@ -9,8 +9,7 @@ namespace TmxMapLib
     {
     public:
         NullArgumentException(const std::string& argumentName)
-            : std::invalid_argument(argumentName)
-        {
+            : std::invalid_argument(argumentName) {
         }
     };
 
@@ -18,8 +17,7 @@ namespace TmxMapLib
     {
     public:
         XmlAttributeException(const std::string& attributeName)
-            : std::runtime_error(attributeName)
-        {
+            : std::runtime_error(attributeName) {
         }
     };
 
@@ -27,8 +25,7 @@ namespace TmxMapLib
     {
     public:
         XmlElementException(const std::string& elementName)
-            : std::runtime_error(elementName)
-        {
+            : std::runtime_error(elementName) {
         }
     };
 
@@ -36,8 +33,7 @@ namespace TmxMapLib
     {
     public:
         XmlDocumentException(const std::string& documentName)
-            : std::runtime_error(documentName)
-        {
+            : std::runtime_error(documentName) {
         }
     };
 }

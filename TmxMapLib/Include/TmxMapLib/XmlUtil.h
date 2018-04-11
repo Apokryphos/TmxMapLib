@@ -2,11 +2,11 @@
 
 namespace tinyxml2
 {
-    class XMLElement;
+class XMLElement;
 }
 
 namespace TmxMapLib
 {
-    //  =======================================================================
-    int CountElements(const tinyxml2::XMLElement* parent, const char* name);
+//  ===========================================================================
+int countElements(const tinyxml2::XMLElement* parent, const char* name);
 }

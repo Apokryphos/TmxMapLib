@@ -2,37 +2,36 @@
 
 namespace tinyxml2
 {
-    class XMLElement;
+class XMLElement;
 }
 
 namespace TmxMapLib
 {
-    class Frame
-    {
-    private:
-        int mTileId;
-        int mDuration;
+class Frame
+{
+private:
+    int mTileId;
+    int mDuration;
 
-        /*
-        *   Loads frame from XML element.
-        */
-        void LoadFrame(const tinyxml2::XMLElement* frameElement);
+    /*
+    *   Loads frame from XML element.
+    */
+    void loadFrame(const tinyxml2::XMLElement* frameElement);
 
-    public:
+public:
+    /*
+    *   Constructs a frame from an XML element.
+    */
+    Frame(const tinyxml2::XMLElement* frameElement);
 
-        /*
-        *   Constructs a frame from an XML element.
-        */
-        Frame(const tinyxml2::XMLElement* frameElement);
+    /*
+    *   Returns the frame duration in milliseconds.
+    */
+    int getDuration() const;
 
-        /*
-        *   Returns the frame duration in milliseconds.
-        */
-        int GetDuration() const;
-
-        /*
-        *   Returns the local ID of the frame tile within its parent tileset.
-        */
-        int GetTileId() const;
-    };
+    /*
+    *   Returns the local ID of the frame tile within its parent tileset.
+    */
+    int getTileId() const;
+};
 }
