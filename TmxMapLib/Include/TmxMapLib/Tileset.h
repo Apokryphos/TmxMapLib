@@ -1,5 +1,4 @@
-#ifndef TMXMAPLIB_TILESET_HEADER_INCLUDED
-#define TMXMAPLIB_TILESET_HEADER_INCLUDED
+#pragma once
 
 #include "Image.h"
 #include "PropertySet.h"
@@ -83,5 +82,3 @@ namespace TmxMapLib
         int GetTileWidth() const;
     };
 }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef TMXMAPLIB_GID_HEADER_INCLUDED
-#define TMXMAPLIB_GID_HEADER_INCLUDED
+#pragma once
 
 namespace TmxMapLib
 {
@@ -34,5 +33,3 @@ namespace TmxMapLib
                         FLIPPED_DIAGONALLY_FLAG);
     }
 }
-
-#endif

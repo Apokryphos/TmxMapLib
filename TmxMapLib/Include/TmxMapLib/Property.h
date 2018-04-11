@@ -1,5 +1,4 @@
-#ifndef TMXMAPLIB_PROPERTY_HEADER_INCLUDED
-#define TMXMAPLIB_PROPERTY_HEADER_INCLUDED
+#pragma once
 
 #include <string>
 
@@ -154,5 +153,3 @@ namespace TmxMapLib
         void QueryIntValue(int& value, const int defaultValue) const;
     };
 }
-
-#endif

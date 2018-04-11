@@ -1,5 +1,4 @@
-#ifndef TMXMAPLIB_ANIMATION_HEADER_INCLUDED
-#define TMXMAPLIB_ANIMATION_HEADER_INCLUDED
+#pragma once
 
 #include "Frame.h"
 #include <vector>
@@ -48,5 +47,3 @@ namespace TmxMapLib
         const std::vector<Frame>& GetFrames() const;
     };
 }
-
-#endif

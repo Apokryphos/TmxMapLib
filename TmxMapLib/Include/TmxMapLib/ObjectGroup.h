@@ -1,5 +1,4 @@
-#ifndef TMXMAPLIB_OBJECT_GROUP_HEADER_INCLUDED
-#define TMXMAPLIB_OBJECT_GROUP_HEADER_INCLUDED
+#pragma once
 
 #include "LayerBase.h"
 #include "Object.h"
@@ -54,5 +53,3 @@ namespace TmxMapLib
         int GetObjectCount() const;
     };
 }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef TMXMAPLIB_OBJECT_HEADER_INCLUDED
-#define TMXMAPLIB_OBJECT_HEADER_INCLUDED
+#pragma once
 
 #include "Point.h"
 #include "PropertySet.h"
@@ -116,5 +115,3 @@ namespace TmxMapLib
         double GetY() const;
     };
 }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef TMXMAPLIB_MAP_HEADER_INCLUDED
-#define TMXMAPLIB_MAP_HEADER_INCLUDED
+#pragma once
 
 #include "ImageLayer.h"
 #include "ObjectGroup.h"
@@ -169,5 +168,3 @@ namespace TmxMapLib
         int GetWidth() const;
     };
 }
-
-#endif

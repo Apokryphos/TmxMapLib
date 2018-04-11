@@ -1,5 +1,4 @@
-#ifndef TMXMAPLIB_LAYER_BASE_HEADER_INCLUDED
-#define TMXMAPLIB_LAYER_BASE_HEADER_INCLUDED
+#pragma once
 
 #include "PropertySet.h"
 #include <string>
@@ -88,5 +87,3 @@ namespace TmxMapLib
         bool GetVisible() const;
     };
 }
-
-#endif

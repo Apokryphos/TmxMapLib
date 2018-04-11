@@ -1,5 +1,4 @@
-#ifndef TMXMAPLIB_EXCEPTION_HEADER_INCLUDED
-#define TMXMAPLIB_EXCEPTION_HEADER_INCLUDED
+#pragma once
 
 #include <stdexcept>
 #include <string>
@@ -42,5 +41,3 @@ namespace TmxMapLib
         }
     };
 }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef TMXMAPLIB_IMAGE_HEADER_INCLUDED
-#define TMXMAPLIB_IMAGE_HEADER_INCLUDED
+#pragma once
 
 #include <string>
 
@@ -54,5 +53,3 @@ namespace TmxMapLib
         const std::string& GetSource() const;
     };
 }
-
-#endif

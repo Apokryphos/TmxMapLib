@@ -1,5 +1,4 @@
-#ifndef TMXMAPLIB_FRAME_HEADER_INCLUDED
-#define TMXMAPLIB_FRAME_HEADER_INCLUDED
+#pragma once
 
 namespace tinyxml2
 {
@@ -37,5 +36,3 @@ namespace TmxMapLib
         int GetTileId() const;
     };
 }
-
-#endif

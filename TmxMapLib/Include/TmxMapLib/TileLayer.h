@@ -1,5 +1,4 @@
-#ifndef TMXMAPLIB_TILE_LAYER_HEADER_INCLUDED
-#define TMXMAPLIB_TILE_LAYER_HEADER_INCLUDED
+#pragma once
 
 #include "LayerBase.h"
 #include "Tile.h"
@@ -65,5 +64,3 @@ namespace TmxMapLib
         int GetWidth() const;
     };
 }
-
-#endif

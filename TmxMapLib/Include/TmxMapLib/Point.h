@@ -1,5 +1,4 @@
-#ifndef TMXMAPLIB_POINT_HEADER_INCLUDED
-#define TMXMAPLIB_POINT_HEADER_INCLUDED
+#pragma once
 
 namespace TmxMapLib
 {
@@ -15,5 +14,3 @@ namespace TmxMapLib
         }
     };
 }
-
-#endif

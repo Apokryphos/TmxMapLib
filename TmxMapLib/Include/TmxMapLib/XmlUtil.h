@@ -1,3 +1,5 @@
+#pragma once
+
 namespace tinyxml2
 {
     class XMLElement;

@@ -1,5 +1,4 @@
-#ifndef TMXMAPLIB_TILESET_TILE_HEADER_INCLUDED
-#define TMXMAPLIB_TILESET_TILE_HEADER_INCLUDED
+#pragma once
 
 #include "Animation.h"
 #include "PropertySet.h"
@@ -50,5 +49,3 @@ namespace TmxMapLib
         const PropertySet& GetPropertySet() const;
     };
 }
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef TMXMAPLIB_IMAGE_LAYER_HEADER_INCLUDED
-#define TMXMAPLIB_IMAGE_LAYER_HEADER_INCLUDED
+#pragma once
 
 #include "Image.h"
 #include "LayerBase.h"
@@ -35,5 +34,3 @@ namespace TmxMapLib
         const Image& GetImage() const;
     };
 }
-
-#endif
