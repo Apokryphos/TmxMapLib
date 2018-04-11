@@ -1,7 +1,7 @@
 project(TmxMapLib)
 
-set(TMXMAPLIB_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Include)
-set(TMXMAPLIB_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Source)
+set(TMXMAPLIB_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+set(TMXMAPLIB_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 set(TMXMAPLIB_INCLUDE
     ${TMXMAPLIB_INCLUDE_DIR}/TmxMapLib/Animation.h
@@ -47,8 +47,8 @@ include_directories(${TMXMAPLIB_INCLUDE_DIR})
 add_library(TmxMapLib ${TMXMAPLIB_SOURCE} ${TMXMAPLIB_INCLUDE})
 
 target_include_directories(TmxMapLib PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Include>
-    $<INSTALL_INTERFACE:Include>)
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>)
 
 target_link_libraries(TmxMapLib tinyxml2)
 

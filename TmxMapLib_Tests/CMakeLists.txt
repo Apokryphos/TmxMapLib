@@ -1,11 +1,11 @@
 set(TMXMAPLIB_TESTS_SOURCE
-    Source/Tests_Main.cpp
-    Source/Tests_Map.cpp
-    Source/Tests_Property.cpp
+    src/Tests_Main.cpp
+    src/Tests_Map.cpp
+    src/Tests_Property.cpp
 )
 
-include_directories(${TmxMapLib_SOURCE_DIR}/TmxMapLib_Tests/Include)
-include_directories(${TmxMapLib_SOURCE_DIR}/TmxMapLib/Include)
+include_directories(${TmxMapLib_SOURCE_DIR}/TmxMapLib_Tests/include)
+include_directories(${TmxMapLib_SOURCE_DIR}/TmxMapLib/include)
 
 add_executable(TmxMapLib_Tests ${TMXMAPLIB_TESTS_SOURCE})
 include_directories(${CATCH_INCLUDE_DIR})
